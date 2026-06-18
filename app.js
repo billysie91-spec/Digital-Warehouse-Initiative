@@ -73,28 +73,6 @@ for (let p = 1; p <= pdf.numPages; p++) {
 });
 }
 
-let html = `
-<table border="1" cellpadding="5">
-<tr>
-<th>#</th>
-<th>Outlet</th>
-<th>Address</th>
-</tr>
-`;
-
-rows.forEach((r, i) => {
-
-    html += `
-    <tr>
-        <td>${i + 1}</td>
-        <td>${r.outlet}</td>
-        <td>${r.address}</td>
-    </tr>
-    `;
-});
-
-html += "</table>";
-
 document.getElementById("results").innerHTML =
     "<pre>" +
     rows[0].rawText +
