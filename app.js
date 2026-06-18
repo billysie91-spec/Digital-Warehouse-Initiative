@@ -73,10 +73,52 @@ for (let p = 1; p <= pdf.numPages; p++) {
 });
 }
 
+let html = `
+<table border="1" cellpadding="5">
+<tr>
+<th>Outlet</th>
+<th>Address</th>
+<th>Material No</th>
+<th>Description</th>
+<th>Qty</th>
+<th>UOM</th>
+</tr>
+`;
+
+rows.forEach(r => {
+
+    const lines =
+        r.rawText.split("\n")
+        .map(x => x.trim())
+        .filter(x => x);
+
+    for (let i = 0; i < lines.length; i++) {
+
+        if (/^\d{10}$/.test(lines[i])) {
+
+            const materialNo = lines[i];
+            const description = lines[i + 1] || "";
+            const qty = lines[i + 3] || "";
+            const uom = lines[i + 4] || "";
+
+            html += `
+            <tr>
+                <td>${r.outlet}</td>
+                <td>${r.address}</td>
+                <td>${materialNo}</td>
+                <td>${description}</td>
+                <td>${qty}</td>
+                <td>${uom}</td>
+            </tr>
+            `;
+        }
+    }
+});
+
+html += "</table>";
+
 document.getElementById("results").innerHTML =
-    "<pre>" +
-    rows[0].rawText +
-    "</pre>";
+    html;
     }
     catch (err) {
 
