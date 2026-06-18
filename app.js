@@ -32,6 +32,9 @@ document.getElementById("processBtn").addEventListener("click", async () => {
                 .map(i => i.str)
                 .join("\n");
 
+        document.getElementById("status").innerHTML =
+            `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
+
 const lines = text
     .split("\n")
     .map(x => x.trim())
@@ -67,3 +70,15 @@ ${outlet}
 <h3>Address</h3>
 ${address}
 `;
+
+    }
+    catch (err) {
+
+        console.error(err);
+
+        document.getElementById("status").innerHTML =
+            "Failed to read PDF";
+
+    }
+
+});
