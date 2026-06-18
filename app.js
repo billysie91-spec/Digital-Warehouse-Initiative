@@ -115,14 +115,33 @@ rows.forEach(r => {
             const qty = lines[i + 3] || "";
             const uom = lines[i + 4] || "";
 
-exportRows.push({
-    Outlet: r.outlet,
-    Address: r.address,
-    MaterialNo: materialNo,
-    Description: description,
-    Qty: qty,
-    UOM: uom
-});           
+if (recipeMap[description]) {
+
+    recipeMap[description].forEach(item => {
+
+        exportRows.push({
+            Outlet: r.outlet,
+            Address: r.address,
+            MaterialNo: materialNo,
+            Description: item,
+            Qty: qty,
+            UOM: uom
+        });
+
+    });
+
+} else {
+
+    exportRows.push({
+        Outlet: r.outlet,
+        Address: r.address,
+        MaterialNo: materialNo,
+        Description: description,
+        Qty: qty,
+        UOM: uom
+    });
+
+}          
             html += `
             <tr>
                 <td>${r.outlet}</td>
