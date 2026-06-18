@@ -1,3 +1,5 @@
+let exportRows = [];
+
 document.getElementById("processBtn").addEventListener("click", async () => {
 
     const file =
@@ -26,6 +28,8 @@ document.getElementById("status").innerHTML =
 
 let rows = [];
 
+exportRows = [];
+        
 for (let p = 1; p <= pdf.numPages; p++) {
 
     const page =
