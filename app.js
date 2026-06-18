@@ -96,3 +96,14 @@ html += "</table>";
 
 document.getElementById("results").innerHTML =
     html;
+    }
+    catch (err) {
+
+        console.error(err);
+
+        document.getElementById("status").innerHTML =
+            "Failed to read PDF";
+
+    }
+
+});
