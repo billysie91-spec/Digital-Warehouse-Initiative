@@ -96,7 +96,6 @@ let html = `
 <tr>
 <th>Outlet</th>
 <th>Address</th>
-<th>Material No</th>
 <th>Description</th>
 <th>Qty</th>
 <th>UOM</th>
@@ -126,7 +125,6 @@ if (recipeMap[description]) {
         exportRows.push({
             Outlet: r.outlet,
             Address: r.address,
-            MaterialNo: materialNo,
             Description: item,
             Qty: qty,
             UOM: uom
@@ -139,7 +137,6 @@ if (recipeMap[description]) {
     exportRows.push({
         Outlet: r.outlet,
         Address: r.address,
-        MaterialNo: materialNo,
         Description: description,
         Qty: qty,
         UOM: uom
@@ -150,7 +147,6 @@ if (recipeMap[description]) {
             <tr>
                 <td>${r.outlet}</td>
                 <td>${r.address}</td>
-                <td>${materialNo}</td>
                 <td>${description}</td>
                 <td>${qty}</td>
                 <td>${uom}</td>
