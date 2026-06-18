@@ -21,64 +21,78 @@ document.getElementById("processBtn").addEventListener("click", async () => {
                 data: buffer
             }).promise;
 
-        const page =
-            await pdf.getPage(1);
+document.getElementById("status").innerHTML =
+    `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
 
-        const textContent =
-            await page.getTextContent();
+let rows = [];
 
-        const text =
-            textContent.items
-                .map(i => i.str)
-                .join("\n");
+for (let p = 1; p <= pdf.numPages; p++) {
 
-        document.getElementById("status").innerHTML =
-            `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
+    const page =
+        await pdf.getPage(p);
 
-const lines = text
-    .split("\n")
-    .map(x => x.trim())
-    .filter(x => x);
+    const textContent =
+        await page.getTextContent();
 
-const poIndex =
-    lines.findIndex(x =>
-        x.includes("Customer PO No"));
+    const text =
+        textContent.items
+            .map(i => i.str)
+            .join("\n");
 
-const shipIndex =
-    lines.findIndex(x =>
-        x.includes("Ship To Code"));
+    const lines = text
+        .split("\n")
+        .map(x => x.trim())
+        .filter(x => x);
 
-let outlet = "";
-let address = "";
+    const poIndex =
+        lines.findIndex(x =>
+            x.includes("Customer PO No"));
 
-if (poIndex >= 0 && shipIndex > poIndex) {
+    const shipIndex =
+        lines.findIndex(x =>
+            x.includes("Ship To Code"));
+
+    if (poIndex < 0 || shipIndex < 0)
+        continue;
 
     const block =
         lines.slice(poIndex + 1, shipIndex);
 
-    outlet = block[0] || "";
+    if (block.length < 2)
+        continue;
 
-    address =
+    let outlet = block[0];
+
+    let address =
         block.slice(1).join(" ");
+
+    rows.push({
+        outlet,
+        address
+    });
 }
 
-document.getElementById("results").innerHTML =
-`
-<h3>Outlet</h3>
-${outlet}
-
-<h3>Address</h3>
-${address}
+let html = `
+<table border="1" cellpadding="5">
+<tr>
+<th>#</th>
+<th>Outlet</th>
+<th>Address</th>
+</tr>
 `;
 
-    }
-    catch (err) {
+rows.forEach((r, i) => {
 
-        console.error(err);
-
-        document.getElementById("status").innerHTML =
-            "Failed to read PDF";
-
-    }
-
+    html += `
+    <tr>
+        <td>${i + 1}</td>
+        <td>${r.outlet}</td>
+        <td>${r.address}</td>
+    </tr>
+    `;
 });
+
+html += "</table>";
+
+document.getElementById("results").innerHTML =
+    html;
