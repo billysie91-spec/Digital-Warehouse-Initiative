@@ -35,8 +35,41 @@ document.getElementById("processBtn").addEventListener("click", async () => {
         document.getElementById("status").innerHTML =
             `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
 
-        document.getElementById("results").innerHTML =
-            `<pre>${text}</pre>`;
+const lines = text
+    .split("\n")
+    .map(x => x.trim())
+    .filter(x => x);
+
+const poIndex =
+    lines.findIndex(x =>
+        x.includes("Customer PO No"));
+
+const shipIndex =
+    lines.findIndex(x =>
+        x.includes("Ship To Code"));
+
+let outlet = "";
+let address = "";
+
+if (poIndex >= 0 && shipIndex > poIndex) {
+
+    const block =
+        lines.slice(poIndex + 1, shipIndex);
+
+    outlet = block[0] || "";
+
+    address =
+        block.slice(1).join(" ");
+}
+
+document.getElementById("results").innerHTML =
+`
+<h3>Outlet</h3>
+${outlet}
+
+<h3>Address</h3>
+${address}
+`;        
 
     }
     catch (err) {
