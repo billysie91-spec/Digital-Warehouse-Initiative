@@ -75,6 +75,7 @@ for (let p = 1; p <= pdf.numPages; p++) {
     address,
     rawText: text
 });
+
 }
 
 let html = `
@@ -105,6 +106,14 @@ rows.forEach(r => {
             const qty = lines[i + 3] || "";
             const uom = lines[i + 4] || "";
 
+exportRows.push({
+    Outlet: outlet,
+    Address: address,
+    MaterialNo: materialNo,
+    Description: description,
+    Qty: qty,
+    UOM: uom
+});            
             html += `
             <tr>
                 <td>${r.outlet}</td>
@@ -132,5 +141,31 @@ document.getElementById("results").innerHTML =
             "Failed to read PDF";
 
     }
+
+});
+document.getElementById("exportBtn")
+.addEventListener("click", () => {
+
+    if (exportRows.length === 0) {
+        alert("Please process PDF first");
+        return;
+    }
+
+    const ws =
+        XLSX.utils.json_to_sheet(exportRows);
+
+    const wb =
+        XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        ws,
+        "NTUC DO"
+    );
+
+    XLSX.writeFile(
+        wb,
+        "NTUC_DO.xlsx"
+    );
 
 });
