@@ -32,20 +32,38 @@ document.getElementById("processBtn").addEventListener("click", async () => {
                 .map(i => i.str)
                 .join("\n");
 
-        document.getElementById("status").innerHTML =
-            `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
+const lines = text
+    .split("\n")
+    .map(x => x.trim())
+    .filter(x => x);
 
-        document.getElementById("results").innerHTML =
-            `<pre>${text}</pre>`;
+const poIndex =
+    lines.findIndex(x =>
+        x.includes("Customer PO No"));
 
-    }
-    catch (err) {
+const shipIndex =
+    lines.findIndex(x =>
+        x.includes("Ship To Code"));
 
-        console.error(err);
+let outlet = "";
+let address = "";
 
-        document.getElementById("status").innerHTML =
-            "Failed to read PDF";
+if (poIndex >= 0 && shipIndex > poIndex) {
 
-    }
+    const block =
+        lines.slice(poIndex + 1, shipIndex);
 
-});
+    outlet = block[0] || "";
+
+    address =
+        block.slice(1).join(" ");
+}
+
+document.getElementById("results").innerHTML =
+`
+<h3>Outlet</h3>
+${outlet}
+
+<h3>Address</h3>
+${address}
+`;
