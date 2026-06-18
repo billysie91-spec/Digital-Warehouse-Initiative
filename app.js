@@ -21,64 +21,75 @@ document.getElementById("processBtn").addEventListener("click", async () => {
                 data: buffer
             }).promise;
 
-        const page =
-            await pdf.getPage(1);
+let rows = [];
 
-        const textContent =
-            await page.getTextContent();
+for (let p = 1; p <= pdf.numPages; p++) {
 
-        const text =
-            textContent.items
-                .map(i => i.str)
-                .join("\n");
+    const page =
+        await pdf.getPage(p);
 
-        document.getElementById("status").innerHTML =
-            `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
+    const textContent =
+        await page.getTextContent();
 
-const lines = text
-    .split("\n")
-    .map(x => x.trim())
-    .filter(x => x);
+    const text =
+        textContent.items
+            .map(i => i.str)
+            .join("\n");
 
-const poIndex =
-    lines.findIndex(x =>
-        x.includes("Customer PO No"));
+    const lines = text
+        .split("\n")
+        .map(x => x.trim())
+        .filter(x => x);
 
-const shipIndex =
-    lines.findIndex(x =>
-        x.includes("Ship To Code"));
+    const poIndex =
+        lines.findIndex(x =>
+            x.includes("Customer PO No"));
 
-let outlet = "";
-let address = "";
+    const shipIndex =
+        lines.findIndex(x =>
+            x.includes("Ship To Code"));
 
-if (poIndex >= 0 && shipIndex > poIndex) {
+    if (poIndex < 0 || shipIndex < 0)
+        continue;
 
     const block =
         lines.slice(poIndex + 1, shipIndex);
 
-    outlet = block[0] || "";
+    if (block.length < 2)
+        continue;
 
-    address =
+    let outlet = block[0];
+
+    let address =
         block.slice(1).join(" ");
+
+    rows.push({
+        outlet,
+        address
+    });
 }
 
-document.getElementById("results").innerHTML =
-`
-<h3>Outlet</h3>
-${outlet}
+let html = `
+<table border="1" cellpadding="5">
+<tr>
+<th>#</th>
+<th>Outlet</th>
+<th>Address</th>
+</tr>
+`;
 
-<h3>Address</h3>
-${address}
-`;        
+rows.forEach((r, i) => {
 
-    }
-    catch (err) {
-
-        console.error(err);
-
-        document.getElementById("status").innerHTML =
-            "Failed to read PDF";
-
-    }
-
+    html += `
+    <tr>
+        <td>${i + 1}</td>
+        <td>${r.outlet}</td>
+        <td>${r.address}</td>
+    </tr>
+    `;
 });
+
+html += "</table>";
+
+document.getElementById("results").innerHTML =
+    html;
