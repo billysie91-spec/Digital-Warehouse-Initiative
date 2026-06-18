@@ -1,5 +1,14 @@
 let exportRows = [];
 
+const recipeMap = {
+
+    "Fish with Garlic Bean Sauce": [
+        "Fish\\Cube\\8-15g\\Cooked\\600g",
+        "Sauce\\Garlic Soy\\FZ\\250G"
+    ]
+
+};
+
 document.getElementById("processBtn").addEventListener("click", async () => {
 
     const file =
