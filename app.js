@@ -78,10 +78,19 @@ for (let p = 1; p <= pdf.numPages; p++) {
     if (block.length < 2)
         continue;
 
-    let outlet = block[0];
+let outlet = block[0] || "";
+let address = "";
 
-    let address =
-        block.slice(1).join(" ");
+if (
+    block.length >= 3 &&
+    /^Blk\s/i.test(block[1])
+) {
+    outlet += " " + block[1];
+    address = block.slice(2).join(" ");
+}
+else {
+    address = block.slice(1).join(" ");
+}
 
     rows.push({
     outlet,
