@@ -21,9 +21,22 @@ document.getElementById("processBtn").addEventListener("click", async () => {
                 data: buffer
             }).promise;
 
+        const page =
+            await pdf.getPage(1);
+
+        const textContent =
+            await page.getTextContent();
+
+        const text =
+            textContent.items
+                .map(i => i.str)
+                .join("\n");
+
         document.getElementById("status").innerHTML =
-            `PDF Loaded<br>
-             Total Pages: ${pdf.numPages}`;
+            `PDF Loaded<br>Total Pages: ${pdf.numPages}`;
+
+        document.getElementById("results").innerHTML =
+            `<pre>${text}</pre>`;
 
     }
     catch (err) {
@@ -32,6 +45,7 @@ document.getElementById("processBtn").addEventListener("click", async () => {
 
         document.getElementById("status").innerHTML =
             "Failed to read PDF";
+
     }
 
 });
