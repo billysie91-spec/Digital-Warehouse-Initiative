@@ -84,7 +84,10 @@ let address = "";
 for (let j = 0; j < block.length; j++) {
 
     if (
-        block[j].startsWith("Blk ") &&
+        (
+            /^Blk\s+/i.test(block[j]) ||
+            /^No\.\s*/i.test(block[j])
+        ) &&
         !block[j].includes("(CC)") &&
         !block[j].includes("(DS)") &&
         !block[j].includes("(EY)")
