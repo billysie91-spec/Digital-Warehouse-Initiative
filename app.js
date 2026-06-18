@@ -96,7 +96,9 @@ rows.forEach((r, i) => {
 html += "</table>";
 
 document.getElementById("results").innerHTML =
-    html;
+    "<pre>" +
+    rows[0].rawText +
+    "</pre>";
     }
     catch (err) {
 
