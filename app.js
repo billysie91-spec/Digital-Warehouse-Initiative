@@ -157,11 +157,39 @@ document.getElementById("exportBtn")
     const wb =
         XLSX.utils.book_new();
 
+    const summary = {};
+
+exportRows.forEach(r => {
+
+    if (!summary[r.Description]) {
+        summary[r.Description] = 0;
+    }
+
+    summary[r.Description] +=
+        Number(r.Qty) || 0;
+
+});
+
+const summaryRows =
+    Object.keys(summary).map(k => ({
+        Description: k,
+        TotalQty: summary[k]
+    }));
+
+const wsSummary =
+    XLSX.utils.json_to_sheet(summaryRows);
+    
     XLSX.utils.book_append_sheet(
         wb,
         ws,
         "NTUC DO"
     );
+
+    XLSX.utils.book_append_sheet(
+    wb,
+    wsSummary,
+    "Summary"
+);
 
     XLSX.writeFile(
         wb,
