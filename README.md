@@ -1,2 +1,1 @@
-# ntuc-do-converter
-Convert Delivery Order PDF to Excel
+# NTUC DO Converter

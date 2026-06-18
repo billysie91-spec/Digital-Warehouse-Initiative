@@ -1,0 +1,1 @@
+document.getElementById('processBtn').onclick=()=>document.getElementById('status').innerText='Template project loaded';
