@@ -67,9 +67,10 @@ for (let p = 1; p <= pdf.numPages; p++) {
         block.slice(1).join(" ");
 
     rows.push({
-        outlet,
-        address
-    });
+    outlet,
+    address,
+    rawText: text
+});
 }
 
 let html = `
