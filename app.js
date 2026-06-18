@@ -107,13 +107,13 @@ rows.forEach(r => {
             const uom = lines[i + 4] || "";
 
 exportRows.push({
-    Outlet: outlet,
-    Address: address,
+    Outlet: r.outlet,
+    Address: r.address,
     MaterialNo: materialNo,
     Description: description,
     Qty: qty,
     UOM: uom
-});            
+});           
             html += `
             <tr>
                 <td>${r.outlet}</td>
