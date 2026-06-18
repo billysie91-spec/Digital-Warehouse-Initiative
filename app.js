@@ -78,18 +78,26 @@ for (let p = 1; p <= pdf.numPages; p++) {
     if (block.length < 2)
         continue;
 
-let outlet = block[0] || "";
+let outlet = "";
 let address = "";
 
-if (
-    block.length >= 3 &&
-    /^Blk\s/i.test(block[1])
-) {
-    outlet += " " + block[1];
-    address = block.slice(2).join(" ");
-}
-else {
-    address = block.slice(1).join(" ");
+for (let j = 0; j < block.length; j++) {
+
+    if (
+        block[j].startsWith("Blk ") &&
+        !block[j].includes("(CC)") &&
+        !block[j].includes("(DS)") &&
+        !block[j].includes("(EY)")
+    ) {
+
+        outlet =
+            block.slice(0, j).join(" ");
+
+        address =
+            block.slice(j).join(" ");
+
+        break;
+    }
 }
 
     rows.push({
