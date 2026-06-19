@@ -239,7 +239,7 @@ exportRows.push({
             `;
         }
     }
-});
+}
 
 html += "</table>";
 
