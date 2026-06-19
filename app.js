@@ -159,6 +159,7 @@ rows.forEach(r => {
 if (recipeMap[description]) {
 
     recipeMap[description].forEach(item => {
+        
 
         const matched =
             addressMaster.find(x =>
@@ -169,7 +170,17 @@ if (recipeMap[description]) {
                     .trim()
                     .toLowerCase()
             );
-
+  
+        html += `
+    <tr>
+        <td>${r.outlet}</td>
+        <td>${matched ? matched["Delivery Address"] : r.address}</td>
+        <td>${item}</td>
+        <td>${qty}</td>
+        <td>${uom}</td>
+    </tr>
+    `;
+        
         exportRows.push({
             Outlet: r.outlet,
 
@@ -299,7 +310,6 @@ const wsSummary =
     );
 
 });
-let addressMaster = [];
 
 document
 .getElementById("masterFile")
