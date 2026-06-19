@@ -101,16 +101,15 @@ let address = "";
 
 for (let j = 0; j < block.length; j++) {
 
-    if (
-        (
-            /^(Blk|Bllk|lk)\s*/i.test(block[j])
-            /^No\.\s*/i.test(block[j])
-        ) &&
-        !block[j].includes("(CC)") &&
-        !block[j].includes("(DS)") &&
-        !block[j].includes("(EY)")
-    ) {
-
+if (
+    (
+        /^(Blk|Bllk|lk)\s*/i.test(block[j]) ||
+        /^No\.\s*/i.test(block[j])
+    ) &&
+    !block[j].includes("(CC)") &&
+    !block[j].includes("(DS)") &&
+    !block[j].includes("(EY)")
+) {
         outlet =
             block.slice(0, j).join(" ");
 
