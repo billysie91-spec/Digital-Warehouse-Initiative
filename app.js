@@ -332,8 +332,8 @@ document
             workbook.SheetNames[0]
         ];
 
-    addressMaster =
-        XLSX.utils.sheet_to_json(sheet);
+addressMaster =
+    XLSX.utils.sheet_to_json(sheet);
 
 console.table(addressMaster);
 
