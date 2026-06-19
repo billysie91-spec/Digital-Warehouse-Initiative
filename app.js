@@ -326,8 +326,7 @@ document
     addressMaster =
         XLSX.utils.sheet_to_json(sheet);
 
-    console.log(
-        "Address Master Loaded:",
+console.table(addressMaster);
         addressMaster.length
     );
 
