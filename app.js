@@ -242,10 +242,21 @@ matched =
                 x["Delivery Address"]
             );
 
-        return (
-            masterAddr.includes(pdfAddr) ||
-            pdfAddr.includes(masterAddr)
-        );
+        const pdfPostal =
+            pdfAddr.match(/\d{6}/)?.[0];
+
+        const masterPostal =
+            masterAddr.match(/\d{6}/)?.[0];
+
+        if (
+            pdfPostal &&
+            masterPostal &&
+            pdfPostal === masterPostal
+        ) {
+            return true;
+        }
+
+        return false;
 
     });
 
@@ -371,20 +382,31 @@ else if (candidates.length > 1) {
     const pdfAddr =
         normalizeAddress(r.address);
 
-    matched =
-        candidates.find(x => {
+matched =
+    candidates.find(x => {
 
-            const masterAddr =
-                normalizeAddress(
-                    x["Delivery Address"]
-                );
-
-            return (
-                masterAddr.includes(pdfAddr) ||
-                pdfAddr.includes(masterAddr)
+        const masterAddr =
+            normalizeAddress(
+                x["Delivery Address"]
             );
 
-        });
+        const pdfPostal =
+            pdfAddr.match(/\d{6}/)?.[0];
+
+        const masterPostal =
+            masterAddr.match(/\d{6}/)?.[0];
+
+        if (
+            pdfPostal &&
+            masterPostal &&
+            pdfPostal === masterPostal
+        ) {
+            return true;
+        }
+
+        return false;
+
+    });
 
     if (!matched) {
         matched = candidates[0];
