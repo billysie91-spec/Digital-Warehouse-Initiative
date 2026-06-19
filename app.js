@@ -193,16 +193,17 @@ console.log(
         </tr>
         `;
 
-        exportRows.push({
-            Outlet: r.outlet,
-            Address: matched
-                ? matched["Delivery Address"]
-                : r.address,
+exportRows.push({
+    Outlet: r.outlet,
 
-            Description: item,
-            Qty: qty,
-            UOM: uom
-        });
+    Address: matched
+        ? matched["Delivery Address"]
+        : r.address,
+
+    Description: description,
+    Qty: qty,
+    UOM: uom
+});
 
     });
 
