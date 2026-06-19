@@ -193,9 +193,9 @@ if (recipeMap[description]) {
                 : "",
 
             Description: item,
-Qty: qty,
-UOM: uom
-});
+            Qty: qty,
+            UOM: uom
+            });
 
 });
 
