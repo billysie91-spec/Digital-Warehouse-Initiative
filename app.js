@@ -214,22 +214,46 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-    matched =
-        candidates.find(x =>
+const pdfAddr =
+    normalizeAddress(r.address);
+
+matched =
+    candidates.find(x => {
+
+        const masterAddr =
             normalizeAddress(
                 x["Delivery Address"]
-            ).includes(
-                normalizeAddress(r.address)
-            )
+            );
+
+        return (
+            masterAddr.includes(pdfAddr) ||
+            pdfAddr.includes(masterAddr)
         );
+
+    });
 
     if (!matched) {
         matched = candidates[0];
     }
 }
+
         console.log(
     "PDF ADDRESS:",
-    r.address,
+    normalizeAddress(r.address)
+);
+
+candidates.forEach(x => {
+
+    console.log(
+        "MASTER:",
+        normalizeAddress(
+            x["Delivery Address"]
+        )
+    );
+
+});
+
+console.log(
     "MATCHED:",
     matched
         ? matched["Delivery Address"]
