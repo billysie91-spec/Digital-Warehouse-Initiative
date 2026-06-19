@@ -160,17 +160,20 @@ if (recipeMap[description]) {
     recipeMap[description].forEach(item => {
 
 const outletName =
-    String(r.outlet || "")
-        .trim();
+String(r.outlet)
+    .replace(/limited/gi, "")
+    .trim()
+    .toLowerCase()
 
 const matched =
     outletName
         ? addressMaster.find(x =>
             String(x["Recipient Name"] || "")
+                .replace(/limited/gi, "")
                 .trim()
                 .toLowerCase() ===
             outletName.toLowerCase()
-          )
+        )
         : null;
 
 console.log(
@@ -206,15 +209,18 @@ console.log(
 } else {
 
 const outletName =
-    String(r.outlet || "")
-        .trim();
+String(r.outlet)
+    .replace(/limited/gi, "")
+    .trim()
+    .toLowerCase()
 
 const matched =
     outletName
         ? addressMaster.find(x =>
             String(x["Recipient Name"] || "")
-                .trim()
-                .toLowerCase() ===
+    .replace(/limited/gi, "")
+    .trim()
+    .toLowerCase() ===
             outletName.toLowerCase()
           )
         : null;
