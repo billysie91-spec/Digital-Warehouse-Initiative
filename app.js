@@ -197,8 +197,8 @@ if (recipeMap[description]) {
             UOM: uom
         });
 
-    });
-
+}
+                                   
 else {
 
 const matched =
