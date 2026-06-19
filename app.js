@@ -7,11 +7,29 @@ const recipeMap = {
         "Sauce\\Garlic Soy\\FZ\\250G"
     ],
 
-        "Tangy Soy Fish": [
+    "Tangy Soy Fish": [
         "Fish\\Cube\\8-15g\\Cooked\\600g",
         "Sauce\\Tangy Soy\\Fz\\250G"
     ]
 };
+
+let addressMaster = [];
+
+function normalizeAddress(text) {
+
+    return text
+        .toUpperCase()
+        .replace(/BLK/g, "")
+        .replace(/STREET/g, "ST")
+        .replace(/AVENUE/g, "AVE")
+        .replace(/ROAD/g, "RD")
+        .replace(/SINGAPORE\s+\d+/g, "")
+        .replace(/#/g, "")
+        .replace(/,/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+}
 
 document.getElementById("processBtn").addEventListener("click", async () => {
 
