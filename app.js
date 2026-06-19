@@ -369,19 +369,23 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-    matched =
-        candidates.find(x =>
+const pdfAddr =
+    normalizeAddress(r.address);
+
+matched =
+    candidates.find(x => {
+
+        const masterAddr =
             normalizeAddress(
                 x["Delivery Address"]
-            ).includes(
-                normalizeAddress(r.address)
-            )
+            );
+
+        return (
+            masterAddr.includes(pdfAddr) ||
+            pdfAddr.includes(masterAddr)
         );
 
-    if (!matched) {
-        matched = candidates[0];
-    }
-}
+    });
     
 console.log(
     "PDF ADDRESS:",
