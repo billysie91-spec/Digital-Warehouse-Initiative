@@ -200,7 +200,7 @@ exportRows.push({
         ? matched["Delivery Address"]
         : r.address,
 
-    Description: description,
+    Description: item,
     Qty: qty,
     UOM: uom
 });
@@ -226,14 +226,14 @@ const matched =
           )
         : null;
 
-    exportRows.push({
+exportRows.push({
     Outlet: r.outlet,
 
     Address: matched
         ? matched["Delivery Address"]
         : r.address,
 
-    Description: item,
+    Description: description,
     Qty: qty,
     UOM: uom
 });
