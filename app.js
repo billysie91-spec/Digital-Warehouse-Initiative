@@ -27,15 +27,21 @@ function normalizeOutlet(text) {
 
 function normalizeAddress(text) {
 
-    return text
+    return String(text || "")
         .toUpperCase()
+        .replace(/LIMITED/g, "")
         .replace(/BLK/g, "")
-        .replace(/STREET/g, "ST")
         .replace(/AVENUE/g, "AVE")
+        .replace(/STREET/g, "ST")
         .replace(/ROAD/g, "RD")
-        .replace(/SINGAPORE\s+\d+/g, "")
+        .replace(/SINGAPORE/g, "")
+        .replace(/NORTH|SOUTH|EAST|WEST/g, "")
+        .replace(/DELIVERY TO/g, "")
         .replace(/#/g, "")
         .replace(/,/g, "")
+        .replace(/\(/g, "")
+        .replace(/\)/g, "")
+        .replace(/-/g, " ")
         .replace(/\s+/g, " ")
         .trim();
 
@@ -190,7 +196,36 @@ console.log(
     candidates.length
 );
         
-const matched = candidates[0];
+let matched = null;
+
+if (candidates.length === 1) {
+
+    matched = candidates[0];
+
+}
+else if (candidates.length > 1) {
+
+    matched =
+        candidates.find(x =>
+            normalizeAddress(
+                x["Delivery Address"]
+            ).includes(
+                normalizeAddress(r.address)
+            )
+        );
+
+    if (!matched) {
+        matched = candidates[0];
+    }
+}
+        console.log(
+    "PDF ADDRESS:",
+    r.address,
+    "MATCHED:",
+    matched
+        ? matched["Delivery Address"]
+        : "NONE"
+);
         
         html += `
         <tr>
@@ -242,8 +277,38 @@ console.log(
     candidates.length
 );
 
-const matched = candidates[0];
+let matched = null;
 
+if (candidates.length === 1) {
+
+    matched = candidates[0];
+
+}
+else if (candidates.length > 1) {
+
+    matched =
+        candidates.find(x =>
+            normalizeAddress(
+                x["Delivery Address"]
+            ).includes(
+                normalizeAddress(r.address)
+            )
+        );
+
+    if (!matched) {
+        matched = candidates[0];
+    }
+}
+    
+console.log(
+    "PDF ADDRESS:",
+    r.address,
+    "MATCHED:",
+    matched
+        ? matched["Delivery Address"]
+        : "NONE"
+);
+    
 exportRows.push({
     Outlet: String(r.outlet)
     .replace(/limited/gi, "")
