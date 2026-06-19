@@ -235,11 +235,38 @@ matched =
     if (!matched) {
         matched = candidates[0];
     }
-}
+    
+    console.log(
+    "PDF RAW:",
+    r.address
+);
 
-        console.log(
-    "PDF ADDRESS:",
+console.log(
+    "PDF NORMALIZED:",
     normalizeAddress(r.address)
+);
+
+candidates.forEach(x => {
+
+    console.log(
+        "MASTER RAW:",
+        x["Delivery Address"]
+    );
+
+    console.log(
+        "MASTER NORMALIZED:",
+        normalizeAddress(
+            x["Delivery Address"]
+        )
+    );
+
+});
+
+console.log(
+    "MATCHED:",
+    matched
+        ? matched["Delivery Address"]
+        : "NONE"
 );
 
 candidates.forEach(x => {
