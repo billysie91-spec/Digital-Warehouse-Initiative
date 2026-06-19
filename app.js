@@ -15,6 +15,16 @@ const recipeMap = {
 
 let addressMaster = [];
 
+function normalizeOutlet(text) {
+
+    return String(text || "")
+        .replace(/limited/gi, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+
+}
+
 function normalizeAddress(text) {
 
     return text
