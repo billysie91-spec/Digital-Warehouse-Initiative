@@ -160,15 +160,22 @@ if (recipeMap[description]) {
 
     recipeMap[description].forEach(item => {
 
-        const matched =
-            addressMaster.find(x =>
-                String(x["Recipient Name"] || "")
-                    .trim()
-                    .toLowerCase() ===
-                String(r.outlet)
-                    .trim()
-                    .toLowerCase()
-            );
+const matched =
+    addressMaster.find(x =>
+        String(x["Recipient Name"] || "")
+            .trim()
+            .toLowerCase() ===
+        String(r.outlet)
+            .trim()
+            .toLowerCase()
+    );
+
+console.log(
+    "PDF:",
+    r.outlet,
+    "MATCH:",
+    matched
+);
 
         html += `
         <tr>
