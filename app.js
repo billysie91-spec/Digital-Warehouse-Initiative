@@ -195,9 +195,7 @@ console.log(
             Address: matched
                 ? matched["Delivery Address"]
                 : r.address,
-            PostalCode: matched
-                ? matched["Postal Code"]
-                : "",
+
             Description: item,
             Qty: qty,
             UOM: uom
@@ -222,17 +220,16 @@ const matched =
         : null;
 
     exportRows.push({
-        Outlet: r.outlet,
-        Address: matched
-            ? matched["Delivery Address"]
-            : r.address,
-        PostalCode: matched
-            ? matched["Postal Code"]
-            : "",
-        Description: description,
-        Qty: qty,
-        UOM: uom
-    });
+    Outlet: r.outlet,
+
+    Address: matched
+        ? matched["Delivery Address"]
+        : r.address,
+
+    Description: item,
+    Qty: qty,
+    UOM: uom
+});
 
     html += `
     <tr>
