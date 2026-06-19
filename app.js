@@ -192,6 +192,23 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
 
+        console.log(
+    "PDF OUTLET:",
+    r.outlet
+);
+
+console.log(
+    "NORMALIZED:",
+    normalizeOutlet(r.outlet)
+);
+
+console.table(
+    candidates.map(x => ({
+        Name: x["Recipient Name"],
+        Address: x["Delivery Address"]
+    }))
+);
+
 console.log(
     "PDF:",
     normalizeOutlet(r.outlet)
