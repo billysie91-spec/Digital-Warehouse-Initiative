@@ -263,3 +263,33 @@ const wsSummary =
     );
 
 });
+let addressMaster = [];
+
+document
+.getElementById("masterFile")
+.addEventListener("change", async (e) => {
+
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    const data =
+        await file.arrayBuffer();
+
+    const workbook =
+        XLSX.read(data);
+
+    const sheet =
+        workbook.Sheets[
+            workbook.SheetNames[0]
+        ];
+
+    addressMaster =
+        XLSX.utils.sheet_to_json(sheet);
+
+    console.log(
+        "Address Master Loaded:",
+        addressMaster.length
+    );
+
+});
