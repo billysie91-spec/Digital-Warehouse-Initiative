@@ -194,7 +194,10 @@ console.log(
         `;
 
 exportRows.push({
-    Outlet: r.outlet,
+    Outlet: String(r.outlet)
+    .replace(/limited/gi, "")
+    .replace(/\s+/g, " ")
+    .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
@@ -227,7 +230,10 @@ const matched =
         : null;
 
 exportRows.push({
-    Outlet: r.outlet,
+    Outlet: String(r.outlet)
+    .replace(/limited/gi, "")
+    .replace(/\s+/g, " ")
+    .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
