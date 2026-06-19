@@ -160,15 +160,19 @@ if (recipeMap[description]) {
 
     recipeMap[description].forEach(item => {
 
+const outletName =
+    String(r.outlet || "")
+        .trim();
+
 const matched =
-    addressMaster.find(x =>
-        String(x["Recipient Name"] || "")
-            .trim()
-            .toLowerCase() ===
-        String(r.outlet)
-            .trim()
-            .toLowerCase()
-    );
+    outletName
+        ? addressMaster.find(x =>
+            String(x["Recipient Name"] || "")
+                .trim()
+                .toLowerCase() ===
+            outletName.toLowerCase()
+          )
+        : null;
 
 console.log(
     "PDF:",
@@ -204,15 +208,19 @@ console.log(
 
 } else {
 
-    const matched =
-        addressMaster.find(x =>
+const outletName =
+    String(r.outlet || "")
+        .trim();
+
+const matched =
+    outletName
+        ? addressMaster.find(x =>
             String(x["Recipient Name"] || "")
                 .trim()
                 .toLowerCase() ===
-            String(r.outlet)
-                .trim()
-                .toLowerCase()
-        );
+            outletName.toLowerCase()
+          )
+        : null;
 
     exportRows.push({
         Outlet: r.outlet,
