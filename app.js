@@ -165,24 +165,23 @@ String(r.outlet)
     .trim()
     .toLowerCase()
 
-const matched =
-    outletName
-        ? addressMaster.find(x =>
-            String(x["Recipient Name"] || "")
-                .replace(/limited/gi, "")
-                .trim()
-                .toLowerCase() ===
-            outletName.toLowerCase()
-        )
-        : null;
+const candidates =
+    addressMaster.filter(x =>
+        normalizeOutlet(
+            x["Recipient Name"]
+        ) ===
+        normalizeOutlet(r.outlet)
+    );
 
 console.log(
     "PDF:",
     r.outlet,
-    "MATCH:",
-    matched
+    "Candidates:",
+    candidates.length
 );
-
+        
+const matched = candidates[0];
+        
         html += `
         <tr>
             <td>${r.outlet}</td>
