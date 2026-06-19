@@ -159,7 +159,6 @@ rows.forEach(r => {
 if (recipeMap[description]) {
 
     recipeMap[description].forEach(item => {
-        
 
         const matched =
             addressMaster.find(x =>
@@ -170,73 +169,67 @@ if (recipeMap[description]) {
                     .trim()
                     .toLowerCase()
             );
-  
+
         html += `
+        <tr>
+            <td>${r.outlet}</td>
+            <td>${matched ? matched["Delivery Address"] : r.address}</td>
+            <td>${item}</td>
+            <td>${qty}</td>
+            <td>${uom}</td>
+        </tr>
+        `;
+
+        exportRows.push({
+            Outlet: r.outlet,
+            Address: matched
+                ? matched["Delivery Address"]
+                : r.address,
+            PostalCode: matched
+                ? matched["Postal Code"]
+                : "",
+            Description: item,
+            Qty: qty,
+            UOM: uom
+        });
+
+    });
+
+} else {
+
+    const matched =
+        addressMaster.find(x =>
+            String(x["Recipient Name"] || "")
+                .trim()
+                .toLowerCase() ===
+            String(r.outlet)
+                .trim()
+                .toLowerCase()
+        );
+
+    exportRows.push({
+        Outlet: r.outlet,
+        Address: matched
+            ? matched["Delivery Address"]
+            : r.address,
+        PostalCode: matched
+            ? matched["Postal Code"]
+            : "",
+        Description: description,
+        Qty: qty,
+        UOM: uom
+    });
+
+    html += `
     <tr>
         <td>${r.outlet}</td>
         <td>${matched ? matched["Delivery Address"] : r.address}</td>
-        <td>${item}</td>
+        <td>${description}</td>
         <td>${qty}</td>
         <td>${uom}</td>
     </tr>
     `;
-        
-        exportRows.push({
-            Outlet: r.outlet,
-
-            Address: matched
-                ? matched["Delivery Address"]
-                : r.address,
-
-            PostalCode: matched
-                ? matched["Postal Code"]
-                : "",
-
-            Description: item,
-            Qty: qty,
-            UOM: uom
-            });
-
-});
-
 }
-                                   
-else {
-
-const matched =
-    addressMaster.find(x =>
-        String(x["Recipient Name"] || "")
-            .trim()
-            .toLowerCase() ===
-        String(r.outlet)
-            .trim()
-            .toLowerCase()
-    );
-
-exportRows.push({
-    Outlet: r.outlet,
-
-    Address: matched
-        ? matched["Delivery Address"]
-        : r.address,
-
-    PostalCode: matched
-        ? matched["Postal Code"]
-        : "",
-
-    Description: description,
-    Qty: qty,
-    UOM: uom
-});        
-            html += `
-            <tr>
-                <td>${r.outlet}</td>
-                <td>${matched ? matched["Delivery Address"] : r.address}</td>
-                <td>${description}</td>
-                <td>${qty}</td>
-                <td>${uom}</td>
-            </tr>
-            `;
         }
     }
 });
