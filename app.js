@@ -199,8 +199,6 @@ if (recipeMap[description]) {
 
     });
 
-}
-
 else {
 
 const matched =
