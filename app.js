@@ -18,10 +18,13 @@ let addressMaster = [];
 function normalizeOutlet(text) {
 
     return String(text || "")
-        .replace(/limited/gi, "")
-        .replace(/\s+/g, " ")
-        .trim()
-        .toLowerCase();
+        .toUpperCase()
+        .replace(/LIMITED/g, "")
+        .replace(/[@]/g, "")
+        .replace(/[-]/g, "")
+        .replace(/[()]/g, "")
+        .replace(/\s+/g, "")
+        .trim();
 
 }
 
@@ -191,9 +194,15 @@ const candidates =
 
 console.log(
     "PDF:",
-    r.outlet,
-    "Candidates:",
-    candidates.length
+    normalizeOutlet(r.outlet)
+);
+
+console.log(
+    candidates.map(x =>
+        normalizeOutlet(
+            x["Recipient Name"]
+        )
+    )
 );
         
 let matched = null;
@@ -272,9 +281,15 @@ const candidates =
 
 console.log(
     "PDF:",
-    r.outlet,
-    "Candidates:",
-    candidates.length
+    normalizeOutlet(r.outlet)
+);
+
+console.log(
+    candidates.map(x =>
+        normalizeOutlet(
+            x["Recipient Name"]
+        )
+    )
 );
 
 let matched = null;
