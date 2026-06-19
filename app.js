@@ -303,7 +303,9 @@ const wsSummary =
     wsSummary,
     "Summary"
 );
-
+    
+console.table(exportRows.slice(-20));
+    
     XLSX.writeFile(
         wb,
         "NTUC_DO.xlsx"
@@ -334,7 +336,10 @@ document
         XLSX.utils.sheet_to_json(sheet);
 
 console.table(addressMaster);
-        addressMaster.length
-    );
+
+console.log(
+    "Address Master Loaded:",
+    addressMaster.length
+);
 
 });
