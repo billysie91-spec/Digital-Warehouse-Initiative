@@ -192,7 +192,18 @@ const candidates =
         ) ===
         normalizeOutlet(r.outlet)
     );
+        
+console.log(
+    "Candidates Count:",
+    candidates.length
+);
 
+console.table(
+    candidates.map(x => ({
+        Name: x["Recipient Name"],
+        Address: x["Delivery Address"]
+    }))
+);
         console.log(
     "PDF OUTLET:",
     r.outlet
@@ -349,6 +360,18 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
 
+console.log(
+    "Candidates Count:",
+    candidates.length
+);
+
+console.table(
+    candidates.map(x => ({
+        Name: x["Recipient Name"],
+        Address: x["Delivery Address"]
+    }))
+);
+    
 console.log(
     "PDF:",
     normalizeOutlet(r.outlet)
