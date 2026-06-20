@@ -551,6 +551,11 @@ document
 addressMaster =
     XLSX.utils.sheet_to_json(sheet);
 
+console.log(
+    "FIRST ROW:",
+    addressMaster[0]
+);
+    
 console.table(addressMaster);
 
 console.log(
