@@ -192,19 +192,7 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
 
-        console.table(
-    addressMaster
-        .filter(x =>
-            x["Recipient Name"]
-                .includes("Bukit Timah")
-        )
-        .map(x => ({
-            Original: x["Recipient Name"],
-            Normalized: normalizeOutlet(
-                x["Recipient Name"]
-            )
-        }))
-);
+
         console.log(
     "PDF OUTLET:",
     r.outlet
@@ -244,34 +232,23 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-const pdfAddr =
-    normalizeAddress(r.address);
+    const pdfAddr =
+        normalizeAddress(r.address);
 
-matched =
-    candidates.find(x => {
+    matched =
+        candidates.find(x => {
 
-        const masterAddr =
-            normalizeAddress(
-                x["Delivery Address"]
+            const masterAddr =
+                normalizeAddress(
+                    x["Delivery Address"]
+                );
+
+            return (
+                masterAddr.includes(pdfAddr) ||
+                pdfAddr.includes(masterAddr)
             );
 
-        const pdfPostal =
-            pdfAddr.match(/\d{6}/)?.[0];
-
-        const masterPostal =
-            masterAddr.match(/\d{6}/)?.[0];
-
-        if (
-            pdfPostal &&
-            masterPostal &&
-            pdfPostal === masterPostal
-        ) {
-            return true;
-        }
-
-        return false;
-
-    });
+        });
 
     if (!matched) {
         matched = candidates[0];
@@ -372,20 +349,6 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
     
-    console.table(
-    addressMaster
-        .filter(x =>
-            x["Recipient Name"]
-                .includes("Bukit Timah")
-        )
-        .map(x => ({
-            Original: x["Recipient Name"],
-            Normalized: normalizeOutlet(
-                x["Recipient Name"]
-            )
-        }))
-);
-
 console.log(
     "PDF:",
     normalizeOutlet(r.outlet)
