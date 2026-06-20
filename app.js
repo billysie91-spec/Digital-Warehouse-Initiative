@@ -328,7 +328,7 @@ console.log(
 
 exportRows.push({
     Outlet: matched
-    ? matched["Recipient Name"]
+    ? matched["Centre Name"]
     : String(r.outlet)
         .replace(/limited/gi, "")
         .replace(/\s+/g, " ")
@@ -428,7 +428,7 @@ console.log(
     
 exportRows.push({
     Outlet: matched
-    ? matched["Recipient Name"]
+    ? matched["Centre Name"]
     : String(r.outlet)
         .replace(/limited/gi, "")
         .replace(/\s+/g, " ")
