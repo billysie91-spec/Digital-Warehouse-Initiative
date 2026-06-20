@@ -339,10 +339,12 @@ console.log(
         `;
 
 exportRows.push({
-    Outlet: String(r.outlet)
-    .replace(/limited/gi, "")
-    .replace(/\s+/g, " ")
-    .trim(),
+    Outlet: matched
+    ? matched["Recipient Name"]
+    : String(r.outlet)
+        .replace(/limited/gi, "")
+        .replace(/\s+/g, " ")
+        .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
@@ -450,10 +452,12 @@ console.log(
 );
     
 exportRows.push({
-    Outlet: String(r.outlet)
-    .replace(/limited/gi, "")
-    .replace(/\s+/g, " ")
-    .trim(),
+    Outlet: matched
+    ? matched["Recipient Name"]
+    : String(r.outlet)
+        .replace(/limited/gi, "")
+        .replace(/\s+/g, " ")
+        .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
