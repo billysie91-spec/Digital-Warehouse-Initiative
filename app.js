@@ -339,10 +339,12 @@ console.log(
         `;
 
 exportRows.push({
-    Outlet: String(r.outlet)
-    .replace(/limited/gi, "")
-    .replace(/\s+/g, " ")
-    .trim(),
+    Outlet: matched
+    ? matched["Recipient Name"]
+    : String(r.outlet)
+        .replace(/limited/gi, "")
+        .replace(/\s+/g, " ")
+        .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
@@ -369,6 +371,20 @@ const candidates =
         ) ===
         normalizeOutlet(r.outlet)
     );
+    
+    console.table(
+    addressMaster
+        .filter(x =>
+            x["Recipient Name"]
+                .includes("Bukit Timah")
+        )
+        .map(x => ({
+            Original: x["Recipient Name"],
+            Normalized: normalizeOutlet(
+                x["Recipient Name"]
+            )
+        }))
+);
 
 console.log(
     "PDF:",
@@ -436,10 +452,12 @@ console.log(
 );
     
 exportRows.push({
-    Outlet: String(r.outlet)
-    .replace(/limited/gi, "")
-    .replace(/\s+/g, " ")
-    .trim(),
+    Outlet: matched
+    ? matched["Recipient Name"]
+    : String(r.outlet)
+        .replace(/limited/gi, "")
+        .replace(/\s+/g, " ")
+        .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
