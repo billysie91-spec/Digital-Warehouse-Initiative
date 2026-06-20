@@ -197,30 +197,6 @@ const candidates =
     r.outlet
 );
 
-console.log(
-    "NORMALIZED:",
-    normalizeOutlet(r.outlet)
-);
-
-console.table(
-    candidates.map(x => ({
-        Name: x["Recipient Name"],
-        Address: x["Delivery Address"]
-    }))
-);
-
-console.log(
-    "PDF:",
-    normalizeOutlet(r.outlet)
-);
-
-console.log(
-    candidates.map(x =>
-        normalizeOutlet(
-            x["Recipient Name"]
-        )
-    )
-);
         
 let matched = null;
 
@@ -461,14 +437,16 @@ html += "</table>";
 document.getElementById("results").innerHTML =
     html;
     }
-    catch (err) {
+catch (err) {
 
-        console.error(err);
+    console.error("FULL ERROR:", err);
+    console.error(err.stack);
 
-        document.getElementById("status").innerHTML =
-            "Failed to read PDF";
+    alert(err.message);
 
-    }
+    document.getElementById("status").innerHTML =
+        "Failed to read PDF";
+}
 
 });
 document.getElementById("exportBtn")
