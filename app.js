@@ -257,6 +257,22 @@ else if (candidates.length > 1) {
 
 const pdfAddr =
     normalizeAddress(r.address);
+    
+console.log(
+    "PDF ADDRESS:",
+    normalizeAddress(r.address)
+);
+
+candidates.forEach(x => {
+
+    console.log(
+        "MASTER ADDRESS:",
+        normalizeAddress(
+            x["Centre Address"]
+        )
+    );
+
+});    
 
 matched =
     candidates.find(x => {
@@ -420,6 +436,22 @@ else if (candidates.length > 1) {
 
     const pdfAddr =
         normalizeAddress(r.address);
+    
+    console.log(
+    "PDF ADDRESS:",
+    normalizeAddress(r.address)
+);
+
+candidates.forEach(x => {
+
+    console.log(
+        "MASTER ADDRESS:",
+        normalizeAddress(
+            x["Centre Address"]
+        )
+    );
+
+});
 
     matched =
         candidates.find(x => {
