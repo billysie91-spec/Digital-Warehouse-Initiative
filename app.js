@@ -416,11 +416,11 @@ console.log(
     
 exportRows.push({
     Outlet: matched
-    ? matched["Recipient Name"]
-    : String(r.outlet)
-        .replace(/limited/gi, "")
-        .replace(/\s+/g, " ")
-        .trim(),
+        ? matched["Recipient Name"]
+        : String(r.outlet)
+            .replace(/limited/gi, "")
+            .replace(/\s+/g, " ")
+            .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
