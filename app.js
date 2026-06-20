@@ -329,6 +329,8 @@ exportRows.push({
     UOM: uom
 });
 
+    });
+
 } else {
 
 const outletName =
