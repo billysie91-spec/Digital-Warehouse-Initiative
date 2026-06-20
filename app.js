@@ -21,7 +21,7 @@ function normalizeOutlet(text) {
         .toUpperCase()
         .replace(/LIMITED/g, "")
         .replace(/[@]/g, "")
-        .replace(/-\d+$/g, "")
+        .replace(/[-]/g, "")
         .replace(/[()]/g, "")
         .replace(/\s+/g, "")
         .trim();
@@ -193,11 +193,6 @@ const candidates =
     );
 
         console.log(
-    "CANDIDATES:",
-    candidates.map(x => x["Recipient Name"])
-);
-
-        console.log(
     "PDF OUTLET:",
     r.outlet
 );
@@ -236,36 +231,28 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-    const pdfAddr =
-        normalizeAddress(r.address);
+const pdfAddr =
+    normalizeAddress(r.address);
 
-    matched =
-        candidates.find(x => {
+matched =
+    candidates.find(x => {
 
-            const masterAddr =
-                normalizeAddress(
-                    x["Delivery Address"]
-                );
-
-            return (
-                masterAddr.includes(pdfAddr) ||
-                pdfAddr.includes(masterAddr)
+        const masterAddr =
+            normalizeAddress(
+                x["Delivery Address"]
             );
 
-        });
+        return (
+            masterAddr.includes(pdfAddr) ||
+            pdfAddr.includes(masterAddr)
+        );
+
+    });
 
     if (!matched) {
         matched = candidates[0];
     }
-}
-        
-console.log(
-    "MATCHED NAME:",
-    matched
-        ? matched["Recipient Name"]
-        : "NONE"
-); 
-        
+    
     console.log(
     "PDF RAW:",
     r.address
@@ -328,12 +315,10 @@ console.log(
         `;
 
 exportRows.push({
-    Outlet: matched
-    ? matched["Recipient Name"]
-    : String(r.outlet)
-        .replace(/limited/gi, "")
-        .replace(/\s+/g, " ")
-        .trim(),
+    Outlet: String(r.outlet)
+    .replace(/limited/gi, "")
+    .replace(/\s+/g, " ")
+    .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
@@ -344,7 +329,6 @@ exportRows.push({
     UOM: uom
 });
 
-    });
 } else {
 
 const outletName =
@@ -361,11 +345,6 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
 
-    console.log(
-    "CANDIDATES:",
-    candidates.map(x => x["Recipient Name"])
-);
-    
 console.log(
     "PDF:",
     normalizeOutlet(r.outlet)
@@ -410,12 +389,6 @@ else if (candidates.length > 1) {
         matched = candidates[0];
     }
 }
-    console.log(
-    "MATCHED NAME:",
-    matched
-        ? matched["Recipient Name"]
-        : "NONE"
-);
     
 console.log(
     "PDF ADDRESS:",
@@ -427,12 +400,10 @@ console.log(
 );
     
 exportRows.push({
-    Outlet: matched
-        ? matched["Recipient Name"]
-        : String(r.outlet)
-            .replace(/limited/gi, "")
-            .replace(/\s+/g, " ")
-            .trim(),
+    Outlet: String(r.outlet)
+    .replace(/limited/gi, "")
+    .replace(/\s+/g, " ")
+    .trim(),
 
     Address: matched
         ? matched["Delivery Address"]
@@ -551,14 +522,7 @@ document
 addressMaster =
     XLSX.utils.sheet_to_json(sheet);
 
-console.table(
-    addressMaster
-        .filter(x =>
-            String(
-                x["Recipient Name"] || ""
-            ).includes("Kebun")
-        )
-);
+console.table(addressMaster);
 
 console.log(
     "Address Master Loaded:",
