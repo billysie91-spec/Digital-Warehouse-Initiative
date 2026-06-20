@@ -188,7 +188,7 @@ String(r.outlet)
 const candidates =
     addressMaster.filter(x =>
         normalizeOutlet(
-            x["Recipient Name"]
+            x["Centre Name"]
         ) ===
         normalizeOutlet(r.outlet)
     );
@@ -200,8 +200,8 @@ console.log(
 
 console.table(
     candidates.map(x => ({
-        Name: x["Recipient Name"],
-        Address: x["Delivery Address"]
+        Name: x["Centre Name"],
+        Address: x["Centre Address"]
     }))
 );
         console.log(
@@ -216,8 +216,8 @@ console.log(
 
 console.table(
     candidates.map(x => ({
-        Name: x["Recipient Name"],
-        Address: x["Delivery Address"]
+        Name: x["Centre Name"],
+        Address: x["Centre Address"]
     }))
 );
 
@@ -229,7 +229,7 @@ console.log(
 console.log(
     candidates.map(x =>
         normalizeOutlet(
-            x["Recipient Name"]
+            x["Centre Name"]
         )
     )
 );
@@ -251,7 +251,7 @@ matched =
 
         const masterAddr =
             normalizeAddress(
-                x["Delivery Address"]
+                x["Centre Address"]
             );
 
         return (
@@ -279,13 +279,13 @@ candidates.forEach(x => {
 
     console.log(
         "MASTER RAW:",
-        x["Delivery Address"]
+        x["Centre Address"]
     );
 
     console.log(
         "MASTER NORMALIZED:",
         normalizeAddress(
-            x["Delivery Address"]
+            x["Centre Address"]
         )
     );
 
@@ -294,7 +294,7 @@ candidates.forEach(x => {
 console.log(
     "MATCHED:",
     matched
-        ? matched["Delivery Address"]
+        ? matched["Centre Address"]
         : "NONE"
 );
 
@@ -303,7 +303,7 @@ candidates.forEach(x => {
     console.log(
         "MASTER:",
         normalizeAddress(
-            x["Delivery Address"]
+            x["Centre Address"]
         )
     );
 
@@ -312,14 +312,14 @@ candidates.forEach(x => {
 console.log(
     "MATCHED:",
     matched
-        ? matched["Delivery Address"]
+        ? matched["Centre Address"]
         : "NONE"
 );
         
         html += `
         <tr>
             <td>${r.outlet}</td>
-            <td>${matched ? matched["Delivery Address"] : r.address}</td>
+            <td>${matched ? matched["Centre Address"] : r.address}</td>
             <td>${item}</td>
             <td>${qty}</td>
             <td>${uom}</td>
@@ -335,7 +335,7 @@ exportRows.push({
         .trim(),
 
     Address: matched
-        ? matched["Delivery Address"]
+        ? matched["Centre Address"]
         : r.address,
 
     Description: item,
@@ -355,7 +355,7 @@ String(r.outlet)
 const candidates =
     addressMaster.filter(x =>
         normalizeOutlet(
-            x["Recipient Name"]
+            x["Centre Name"]
         ) ===
         normalizeOutlet(r.outlet)
     );
@@ -367,8 +367,8 @@ console.log(
 
 console.table(
     candidates.map(x => ({
-        Name: x["Recipient Name"],
-        Address: x["Delivery Address"]
+        Name: x["Centre Name"],
+        Address: x["Centre Address"]
     }))
 );
     
@@ -380,7 +380,7 @@ console.log(
 console.log(
     candidates.map(x =>
         normalizeOutlet(
-            x["Recipient Name"]
+            x["Centre Name"]
         )
     )
 );
@@ -402,7 +402,7 @@ else if (candidates.length > 1) {
 
             const masterAddr =
                 normalizeAddress(
-                    x["Delivery Address"]
+                    x["Centre Address"]
                 );
 
             return (
@@ -422,7 +422,7 @@ console.log(
     r.address,
     "MATCHED:",
     matched
-        ? matched["Delivery Address"]
+        ? matched["Centre Address"]
         : "NONE"
 );
     
@@ -435,7 +435,7 @@ exportRows.push({
         .trim(),
 
     Address: matched
-        ? matched["Delivery Address"]
+        ? matched["Centre Address"]
         : r.address,
 
     Description: description,
@@ -446,7 +446,7 @@ exportRows.push({
     html += `
     <tr>
         <td>${r.outlet}</td>
-        <td>${matched ? matched["Delivery Address"] : r.address}</td>
+        <td>${matched ? matched["Centre Address"] : r.address}</td>
         <td>${description}</td>
         <td>${qty}</td>
         <td>${uom}</td>
@@ -569,7 +569,7 @@ console.log(
 
 console.log(
     addressMaster
-        .map(x => x["Recipient Name"])
+        .map(x => x["Centre Name"])
         .filter(x =>
             String(x || "")
                 .includes("Kebun")
@@ -578,7 +578,7 @@ console.log(
 
 console.log(
     addressMaster
-        .map(x => x["Recipient Name"])
+        .map(x => x["Centre Name"])
         .filter(x =>
             String(x || "")
                 .includes("Buona")
