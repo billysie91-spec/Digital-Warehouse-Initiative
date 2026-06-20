@@ -535,4 +535,22 @@ console.log(
     addressMaster.length
 );
 
+console.log(
+    addressMaster
+        .map(x => x["Recipient Name"])
+        .filter(x =>
+            String(x || "")
+                .includes("Kebun")
+        )
+);
+
+console.log(
+    addressMaster
+        .map(x => x["Recipient Name"])
+        .filter(x =>
+            String(x || "")
+                .includes("Buona")
+        )
+);
+    
 });
