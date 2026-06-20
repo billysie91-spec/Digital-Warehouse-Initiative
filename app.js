@@ -267,7 +267,14 @@ candidates.forEach(x => {
 });
 
 console.log(
-    "MATCHED:",
+    "MATCHED NAME:",
+    matched
+        ? matched["Recipient Name"]
+        : "NONE"
+);
+
+console.log(
+    "MATCHED ADDRESS:",
     matched
         ? matched["Delivery Address"]
         : "NONE"
@@ -276,10 +283,13 @@ console.log(
 candidates.forEach(x => {
 
     console.log(
-        "MASTER:",
-        normalizeAddress(
-            x["Delivery Address"]
-        )
+        "MASTER NAME:",
+        x["Recipient Name"]
+    );
+
+    console.log(
+        "MASTER ADDRESS:",
+        x["Delivery Address"]
     );
 
 });
