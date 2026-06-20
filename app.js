@@ -330,7 +330,6 @@ exportRows.push({
 });
 
     });
-
 } else {
 
 const outletName =
