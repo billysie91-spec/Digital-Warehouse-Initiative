@@ -369,20 +369,6 @@ const candidates =
         ) ===
         normalizeOutlet(r.outlet)
     );
-    
-    console.table(
-    addressMaster
-        .filter(x =>
-            x["Recipient Name"]
-                .includes("Bukit Timah")
-        )
-        .map(x => ({
-            Original: x["Recipient Name"],
-            Normalized: normalizeOutlet(
-                x["Recipient Name"]
-            )
-        }))
-);
 
 console.log(
     "PDF:",
