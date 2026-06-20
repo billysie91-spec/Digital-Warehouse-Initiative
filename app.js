@@ -186,12 +186,24 @@ String(r.outlet)
     .toLowerCase()
 
 const candidates =
-    addressMaster.filter(x =>
-        normalizeOutlet(
-            x["Centre Name"]
-        ) ===
-        normalizeOutlet(r.outlet)
-    );
+    addressMaster.filter(x => {
+
+        const masterName =
+            normalizeOutlet(
+                x["Centre Name"]
+            );
+
+        const pdfName =
+            normalizeOutlet(
+                r.outlet
+            );
+
+        return (
+            masterName === pdfName ||
+            masterName.startsWith(pdfName)
+        );
+
+    });
         
 console.log(
     "Candidates Count:",
@@ -353,12 +365,24 @@ String(r.outlet)
     .toLowerCase()
 
 const candidates =
-    addressMaster.filter(x =>
-        normalizeOutlet(
-            x["Centre Name"]
-        ) ===
-        normalizeOutlet(r.outlet)
-    );
+    addressMaster.filter(x => {
+
+        const masterName =
+            normalizeOutlet(
+                x["Centre Name"]
+            );
+
+        const pdfName =
+            normalizeOutlet(
+                r.outlet
+            );
+
+        return (
+            masterName === pdfName ||
+            masterName.startsWith(pdfName)
+        );
+
+    });
 
 console.log(
     "Candidates Count:",
