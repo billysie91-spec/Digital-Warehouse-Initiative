@@ -192,6 +192,10 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
 
+        console.log(
+    "CANDIDATES:",
+    candidates.map(x => x["Recipient Name"])
+);
 
         console.log(
     "PDF OUTLET:",
@@ -254,6 +258,14 @@ else if (candidates.length > 1) {
         matched = candidates[0];
     }
 }
+        
+console.log(
+    "MATCHED NAME:",
+    matched
+        ? matched["Recipient Name"]
+        : "NONE"
+); 
+        
     console.log(
     "PDF RAW:",
     r.address
@@ -348,6 +360,11 @@ const candidates =
         ) ===
         normalizeOutlet(r.outlet)
     );
+
+    console.log(
+    "CANDIDATES:",
+    candidates.map(x => x["Recipient Name"])
+);
     
 console.log(
     "PDF:",
@@ -382,21 +399,18 @@ matched =
                 x["Delivery Address"]
             );
 
-        const pdfPostal =
-            pdfAddr.match(/\d{6}/)?.[0];
+matched =
+    candidates.find(x => {
 
-        const masterPostal =
-            masterAddr.match(/\d{6}/)?.[0];
+        const masterAddr =
+            normalizeAddress(
+                x["Delivery Address"]
+            );
 
-        if (
-            pdfPostal &&
-            masterPostal &&
-            pdfPostal === masterPostal
-        ) {
-            return true;
-        }
-
-        return false;
+        return (
+            masterAddr.includes(pdfAddr) ||
+            pdfAddr.includes(masterAddr)
+        );
 
     });
 
@@ -404,6 +418,12 @@ matched =
         matched = candidates[0];
     }
 }
+    console.log(
+    "MATCHED NAME:",
+    matched
+        ? matched["Recipient Name"]
+        : "NONE"
+);
     
 console.log(
     "PDF ADDRESS:",
