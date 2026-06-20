@@ -551,7 +551,14 @@ document
 addressMaster =
     XLSX.utils.sheet_to_json(sheet);
 
-console.table(addressMaster);
+console.table(
+    addressMaster
+        .filter(x =>
+            String(
+                x["Recipient Name"] || ""
+            ).includes("Kebun")
+        )
+);
 
 console.log(
     "Address Master Loaded:",
