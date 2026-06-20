@@ -192,11 +192,48 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
 
+        console.table(
+    addressMaster
+        .filter(x =>
+            x["Recipient Name"]
+                .includes("Bukit Timah")
+        )
+        .map(x => ({
+            Original: x["Recipient Name"],
+            Normalized: normalizeOutlet(
+                x["Recipient Name"]
+            )
+        }))
+);
         console.log(
     "PDF OUTLET:",
     r.outlet
 );
 
+console.log(
+    "NORMALIZED:",
+    normalizeOutlet(r.outlet)
+);
+
+console.table(
+    candidates.map(x => ({
+        Name: x["Recipient Name"],
+        Address: x["Delivery Address"]
+    }))
+);
+
+console.log(
+    "PDF:",
+    normalizeOutlet(r.outlet)
+);
+
+console.log(
+    candidates.map(x =>
+        normalizeOutlet(
+            x["Recipient Name"]
+        )
+    )
+);
         
 let matched = null;
 
@@ -267,14 +304,7 @@ candidates.forEach(x => {
 });
 
 console.log(
-    "MATCHED NAME:",
-    matched
-        ? matched["Recipient Name"]
-        : "NONE"
-);
-
-console.log(
-    "MATCHED ADDRESS:",
+    "MATCHED:",
     matched
         ? matched["Delivery Address"]
         : "NONE"
@@ -283,13 +313,10 @@ console.log(
 candidates.forEach(x => {
 
     console.log(
-        "MASTER NAME:",
-        x["Recipient Name"]
-    );
-
-    console.log(
-        "MASTER ADDRESS:",
-        x["Delivery Address"]
+        "MASTER:",
+        normalizeAddress(
+            x["Delivery Address"]
+        )
     );
 
 });
@@ -345,6 +372,19 @@ const candidates =
         normalizeOutlet(r.outlet)
     );
     
+    console.table(
+    addressMaster
+        .filter(x =>
+            x["Recipient Name"]
+                .includes("Bukit Timah")
+        )
+        .map(x => ({
+            Original: x["Recipient Name"],
+            Normalized: normalizeOutlet(
+                x["Recipient Name"]
+            )
+        }))
+);
 
 console.log(
     "PDF:",
@@ -447,16 +487,14 @@ html += "</table>";
 document.getElementById("results").innerHTML =
     html;
     }
-catch (err) {
+    catch (err) {
 
-    console.error("FULL ERROR:", err);
-    console.error(err.stack);
+        console.error(err);
 
-    alert(err.message);
+        document.getElementById("status").innerHTML =
+            "Failed to read PDF";
 
-    document.getElementById("status").innerHTML =
-        "Failed to read PDF";
-}
+    }
 
 });
 document.getElementById("exportBtn")
