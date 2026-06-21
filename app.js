@@ -367,6 +367,11 @@ matched =
 );
 
 console.log(
+    "DESCRIPTION:",
+    description
+);
+
+console.log(
     "PDF NORMALIZED:",
     normalizeAddress(r.address)
 );
