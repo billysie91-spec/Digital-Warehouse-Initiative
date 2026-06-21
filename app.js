@@ -290,17 +290,35 @@ else if (candidates.length > 1) {
         .toUpperCase();
 
 if (
-    pdfAddress.includes("YISHUN AVE 11")
+    normalizeOutlet(r.outlet)
+        .includes("NEESOONLINKBLK446CC")
 ) {
 
-    matched =
-        candidates.find(x =>
-            String(
-                x["Centre Address"] || ""
-            )
-            .toUpperCase()
-            .includes("YISHUN AVE 11")
-        );
+    if (
+        pdfAddress.includes("YISHUN AVE 11")
+    ) {
+
+        matched =
+            candidates.find(x =>
+                String(
+                    x["Centre Address"] || ""
+                )
+                .toUpperCase()
+                .includes("YISHUN AVE 11")
+            );
+
+    } else {
+
+        matched =
+            candidates.find(x =>
+                String(
+                    x["Centre Address"] || ""
+                )
+                .toUpperCase()
+                .includes("YISHUN RING ROAD")
+            );
+
+    }
 
 }
 
