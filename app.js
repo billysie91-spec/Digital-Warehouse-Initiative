@@ -689,37 +689,8 @@ addressMaster =
     XLSX.utils.sheet_to_json(sheet);
 
 console.log(
-    "FIRST ROW:",
-    addressMaster[0]
-);
-
-console.log(
-    Object.keys(addressMaster[0])
-);    
-    
-console.table(addressMaster);
-
-console.log(
     "Address Master Loaded:",
     addressMaster.length
 );
 
-console.log(
-    addressMaster
-        .map(x => x["Centre Name"])
-        .filter(x =>
-            String(x || "")
-                .includes("Kebun")
-        )
-);
-
-console.log(
-    addressMaster
-        .map(x => x["Centre Name"])
-        .filter(x =>
-            String(x || "")
-                .includes("Buona")
-        )
-);
-    
 });
