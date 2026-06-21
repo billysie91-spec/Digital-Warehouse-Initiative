@@ -51,6 +51,29 @@ function normalizeAddress(text) {
 
 }
 
+function extractBlk(text) {
+
+    const s =
+        String(text || "")
+        .toUpperCase();
+
+    let m =
+        s.match(/BLK\s*(\d+[A-Z]?)/);
+
+    if (m) {
+        return m[1];
+    }
+
+    m =
+        s.match(/^(\d+[A-Z]?)\s/);
+
+    if (m) {
+        return m[1];
+    }
+
+    return "";
+}
+
 document.getElementById("processBtn").addEventListener("click", async () => {
 
     const file =
@@ -255,37 +278,34 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-const pdfAddr =
-    normalizeAddress(r.address);
-    
+const pdfBlk =
+    extractBlk(r.address);
+
 console.log(
-    "PDF ADDRESS:",
-    normalizeAddress(r.address)
+    "PDF BLK:",
+    pdfBlk
 );
 
 candidates.forEach(x => {
 
     console.log(
-        "MASTER ADDRESS:",
-        normalizeAddress(
+        "MASTER BLK:",
+        extractBlk(
             x["Centre Address"]
         )
     );
 
-});    
+});
 
 matched =
     candidates.find(x => {
 
-        const masterAddr =
-            normalizeAddress(
+        const masterBlk =
+            extractBlk(
                 x["Centre Address"]
             );
 
-        return (
-            masterAddr.includes(pdfAddr) ||
-            pdfAddr.includes(masterAddr)
-        );
+        return masterBlk === pdfBlk;
 
     });
 
@@ -434,39 +454,36 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-    const pdfAddr =
-        normalizeAddress(r.address);
-    
-    console.log(
-    "PDF ADDRESS:",
-    normalizeAddress(r.address)
+    const pdfBlk =
+    extractBlk(r.address);
+
+console.log(
+    "PDF BLK:",
+    pdfBlk
 );
 
 candidates.forEach(x => {
 
     console.log(
-        "MASTER ADDRESS:",
-        normalizeAddress(
+        "MASTER BLK:",
+        extractBlk(
             x["Centre Address"]
         )
     );
 
 });
 
-    matched =
-        candidates.find(x => {
+matched =
+    candidates.find(x => {
 
-            const masterAddr =
-                normalizeAddress(
-                    x["Centre Address"]
-                );
-
-            return (
-                masterAddr.includes(pdfAddr) ||
-                pdfAddr.includes(masterAddr)
+        const masterBlk =
+            extractBlk(
+                x["Centre Address"]
             );
 
-        });
+        return masterBlk === pdfBlk;
+
+    });
 
     if (!matched) {
         matched = candidates[0];
