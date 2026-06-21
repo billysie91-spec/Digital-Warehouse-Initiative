@@ -521,19 +521,22 @@ candidates.forEach(x => {
 });
 
 if (!matched) {
+    
+matched =
+    candidates.find(x => {
 
-    matched =
-        candidates.find(x => {
+        const masterBlk =
+            extractBlk(
+                x["Centre Address"]
+            );
 
-            const masterBlk =
-                extractBlk(
-                    x["Centre Address"]
-                );
+        return masterBlk === pdfBlk;
 
-            return masterBlk === pdfBlk;
+    });
 
-        });
-
+    if (!matched) {
+        matched = candidates[0];
+    }
 }
     
 console.log(
