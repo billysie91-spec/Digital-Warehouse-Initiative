@@ -58,7 +58,7 @@ function extractBlk(text) {
         .toUpperCase();
 
     let m =
-        s.match(/BLK\s*(\d+[A-Z]?)/);
+        s.match(/DELIVERY\s+GO\s+TO\s+BLK\s*(\d+[A-Z]?)/);
 
     if (m) {
         return m[1];
