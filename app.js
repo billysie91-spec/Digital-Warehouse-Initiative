@@ -482,25 +482,6 @@ if (candidates.length === 1) {
 }
 else if (candidates.length > 1) {
 
-    const pdfAddress =
-    String(r.address || "")
-        .toUpperCase();
-
-if (
-    pdfAddress.includes("YISHUN AVE 11")
-) {
-
-    matched =
-        candidates.find(x =>
-            String(
-                x["Centre Address"] || ""
-            )
-            .toUpperCase()
-            .includes("YISHUN AVE 11")
-        );
-
-}
-
     const pdfBlk =
     extractBlk(r.address);
 
@@ -521,16 +502,18 @@ candidates.forEach(x => {
 });
 
 matched =
-    candidates.find(x => {
+        candidates.find(x => {
 
-        const masterBlk =
-            extractBlk(
-                x["Centre Address"]
-            );
+            const masterBlk =
+                extractBlk(
+                    x["Centre Address"]
+                );
 
-        return masterBlk === pdfBlk;
+            return masterBlk === pdfBlk;
 
-    });
+        });
+
+}
 
 if (!matched) {
     matched = candidates[0];
