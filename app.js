@@ -205,6 +205,17 @@ rows.forEach(r => {
             const qty = lines[i + 3] || "";
             const uom = lines[i + 4] || "";
 
+            console.log(
+    "ITEM:",
+    description,
+    "QTY:",
+    qty,
+    "OUTLET:",
+    r.outlet,
+    "ADDRESS:",
+    r.address
+);
+
 if (recipeMap[description]) {
 
     recipeMap[description].forEach(item => {
