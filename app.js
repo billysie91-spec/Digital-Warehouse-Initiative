@@ -520,8 +520,6 @@ candidates.forEach(x => {
 
 });
 
-if (!matched) {
-    
 matched =
     candidates.find(x => {
 
@@ -534,9 +532,9 @@ matched =
 
     });
 
-    if (!matched) {
-        matched = candidates[0];
-    }
+if (!matched) {
+    matched = candidates[0];
+ }
 }
     
 console.log(
