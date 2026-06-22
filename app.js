@@ -236,10 +236,20 @@ const candidates =
             );
 
         const pdfName =
-            normalizeOutlet(
-                r.outlet
-            );
+    normalizeOutlet(
+        r.outlet
+    );
 
+console.log(
+    "PDF OUTLET:",
+    r.outlet
+);
+
+console.log(
+    "PDF NORMALIZED:",
+    pdfName
+);
+        
         return (
             masterName === pdfName ||
             masterName.startsWith(pdfName)
