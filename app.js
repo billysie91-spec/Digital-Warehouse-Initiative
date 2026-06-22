@@ -250,42 +250,6 @@ console.log(
     "Candidates Count:",
     candidates.length
 );
-
-console.table(
-    candidates.map(x => ({
-        Name: x["Centre Name"],
-        Address: x["Centre Address"]
-    }))
-);
-        console.log(
-    "PDF OUTLET:",
-    r.outlet
-);
-
-console.log(
-    "NORMALIZED:",
-    normalizeOutlet(r.outlet)
-);
-
-console.table(
-    candidates.map(x => ({
-        Name: x["Centre Name"],
-        Address: x["Centre Address"]
-    }))
-);
-
-console.log(
-    "PDF:",
-    normalizeOutlet(r.outlet)
-);
-
-console.log(
-    candidates.map(x =>
-        normalizeOutlet(
-            x["Centre Name"]
-        )
-    )
-);
         
 let matched = null;
 
@@ -336,22 +300,6 @@ if (
 const pdfBlk =
     extractBlk(r.address);
 
-console.log(
-    "PDF BLK:",
-    pdfBlk
-);
-
-candidates.forEach(x => {
-
-    console.log(
-        "MASTER BLK:",
-        extractBlk(
-            x["Centre Address"]
-        )
-    );
-
-});
-
 if (!matched) {
     
 matched =
@@ -371,63 +319,7 @@ matched =
         }
     }
 }
-    
-    console.log(
-    "PDF RAW:",
-    r.address
-);
-
-console.log(
-    "DESCRIPTION:",
-    description
-);
-
-console.log(
-    "PDF NORMALIZED:",
-    normalizeAddress(r.address)
-);
-
-candidates.forEach(x => {
-
-    console.log(
-        "MASTER RAW:",
-        x["Centre Address"]
-    );
-
-    console.log(
-        "MASTER NORMALIZED:",
-        normalizeAddress(
-            x["Centre Address"]
-        )
-    );
-
-});
-
-console.log(
-    "MATCHED:",
-    matched
-        ? matched["Centre Address"]
-        : "NONE"
-);
-
-candidates.forEach(x => {
-
-    console.log(
-        "MASTER:",
-        normalizeAddress(
-            x["Centre Address"]
-        )
-    );
-
-});
-
-console.log(
-    "MATCHED:",
-    matched
-        ? matched["Centre Address"]
-        : "NONE"
-);
-        
+      
         html += `
         <tr>
             <td>${r.outlet}</td>
@@ -484,31 +376,6 @@ const candidates =
 
     });
 
-console.log(
-    "Candidates Count:",
-    candidates.length
-);
-
-console.table(
-    candidates.map(x => ({
-        Name: x["Centre Name"],
-        Address: x["Centre Address"]
-    }))
-);
-    
-console.log(
-    "PDF:",
-    normalizeOutlet(r.outlet)
-);
-
-console.log(
-    candidates.map(x =>
-        normalizeOutlet(
-            x["Centre Name"]
-        )
-    )
-);
-
 let matched = null;
 
 if (candidates.length === 1) {
@@ -520,22 +387,6 @@ else if (candidates.length > 1) {
 
     const pdfBlk =
     extractBlk(r.address);
-
-console.log(
-    "PDF BLK:",
-    pdfBlk
-);
-
-candidates.forEach(x => {
-
-    console.log(
-        "MASTER BLK:",
-        extractBlk(
-            x["Centre Address"]
-        )
-    );
-
-});
 
 matched =
     candidates.find(x => {
