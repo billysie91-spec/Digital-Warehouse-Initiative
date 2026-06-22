@@ -22,6 +22,7 @@ function normalizeOutlet(text) {
         .toUpperCase()
         .replace(/LIMITED/g, "")
         .replace(/[@]/g, "")
+        .replace(/[.]/g, "")
         .replace(/[-]/g, "")
         .replace(/[()]/g, "")
         .replace(/\s+/g, "")
