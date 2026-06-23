@@ -122,7 +122,7 @@ for (let p = 1; p <= pdf.numPages; p++) {
     
     console.log(
     "PAGE",
-    pageNum,
+    p,
     "TEXT ITEMS",
     textContent.items.length
 );
