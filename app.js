@@ -118,68 +118,19 @@ for (let p = 1; p <= pdf.numPages; p++) {
         await pdf.getPage(p);
 
     const textContent =
-    await page.getTextContent();
-
-console.log(
+        await page.getTextContent();
+    
+    console.log(
     "PAGE",
     p,
     "TEXT ITEMS",
     textContent.items.length
 );
 
-let text = "";
-
-if (textContent.items.length > 0) {
-
-    text =
+    const text =
         textContent.items
             .map(i => i.str)
             .join("\n");
-
-} else {
-
-    console.log(
-        "OCR PAGE",
-        p
-    );
-
-    const viewport =
-        page.getViewport({
-            scale: 2
-        });
-
-    const canvas =
-        document.createElement("canvas");
-
-    const ctx =
-        canvas.getContext("2d");
-
-    canvas.width =
-        viewport.width;
-
-    canvas.height =
-        viewport.height;
-
-    await page.render({
-        canvasContext: ctx,
-        viewport
-    }).promise;
-
-    const result =
-        await Tesseract.recognize(
-            canvas,
-            "eng"
-        );
-
-    text =
-        result.data.text;
-
-    console.log(
-        "OCR TEXT:",
-        text.substring(0, 500)
-    );
-
-}
 
     const lines = text
         .split("\n")
@@ -194,19 +145,11 @@ if (textContent.items.length > 0) {
         lines.findIndex(x =>
             x.includes("Ship To Code"));
 
-    if (shipIndex < 0)
-    continue;
+    if (poIndex < 0 || shipIndex < 0)
+        continue;
 
-    const startIndex =
-    poIndex >= 0
-        ? poIndex + 1
-        : 0;
-
-const block =
-    lines.slice(
-        startIndex,
-        shipIndex
-    );
+    const block =
+        lines.slice(poIndex + 1, shipIndex);
 
     if (block.length < 2)
         continue;
@@ -218,9 +161,8 @@ for (let j = 0; j < block.length; j++) {
 
 if (
     (
-        /^BLK/i.test(block[j]) ||
-        /^NO\./i.test(block[j]) ||
-        /^\d+[A-Z]?\s+/i.test(block[j])
+        /^(Blk|Bllk|lk)\s*/i.test(block[j]) ||
+        /^No\.\s*/i.test(block[j])
     ) &&
     !block[j].includes("(CC)") &&
     !block[j].includes("(DS)") &&
