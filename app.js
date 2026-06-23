@@ -194,11 +194,19 @@ if (textContent.items.length > 0) {
         lines.findIndex(x =>
             x.includes("Ship To Code"));
 
-    if (poIndex < 0 || shipIndex < 0)
-        continue;
+    if (shipIndex < 0)
+    continue;
 
-    const block =
-        lines.slice(poIndex + 1, shipIndex);
+    const startIndex =
+    poIndex >= 0
+        ? poIndex + 1
+        : 0;
+
+const block =
+    lines.slice(
+        startIndex,
+        shipIndex
+    );
 
     if (block.length < 2)
         continue;
