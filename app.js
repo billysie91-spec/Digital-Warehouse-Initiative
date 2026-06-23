@@ -118,19 +118,32 @@ for (let p = 1; p <= pdf.numPages; p++) {
         await pdf.getPage(p);
 
     const textContent =
-        await page.getTextContent();
-    
-    console.log(
+    await page.getTextContent();
+
+console.log(
     "PAGE",
     p,
     "TEXT ITEMS",
     textContent.items.length
 );
 
-    const text =
+let text = "";
+
+if (textContent.items.length > 0) {
+
+    text =
         textContent.items
             .map(i => i.str)
             .join("\n");
+
+} else {
+
+    console.log(
+        "OCR PAGE",
+        p
+    );
+
+}
 
     const lines = text
         .split("\n")
