@@ -111,7 +111,9 @@ document.getElementById("status").innerHTML =
 let rows = [];
 
 exportRows = [];
-        
+
+let unmatchedCount = 0;
+
 for (let p = 1; p <= pdf.numPages; p++) {
 
     const page =
@@ -341,7 +343,19 @@ matched =
         html += `
         <tr>
             <td>${r.outlet}</td>
-            <td>${matched ? matched["Centre Address"] : r.address}</td>
+            <td
+    ${
+        matched
+        ? ""
+        : 'style="background:#ffcccc;font-weight:bold;"'
+    }
+>
+    ${
+        matched
+        ? matched["Centre Address"]
+        : "ADDRESS NOT FOUND"
+    }
+</td>
             <td>${item}</td>
             <td>${qty}</td>
             <td>${uom}</td>
@@ -419,19 +433,17 @@ matched =
     });
 
     if (!matched) {
-        matched = candidates[0];
-    }
+
+    unmatchedCount++;
+
+    console.warn(
+        "Address not found:",
+        r.outlet,
+        r.address
+    );
+
 }
-    
-console.log(
-    "PDF ADDRESS:",
-    r.address,
-    "MATCHED:",
-    matched
-        ? matched["Centre Address"]
-        : "NONE"
-);
-    
+      
 exportRows.push({
     Outlet: matched
     ? matched["Centre Name"]
@@ -452,7 +464,19 @@ exportRows.push({
     html += `
     <tr>
         <td>${r.outlet}</td>
-        <td>${matched ? matched["Centre Address"] : r.address}</td>
+        <td
+    ${
+        matched
+        ? ""
+        : 'style="background:#ffcccc;font-weight:bold;"'
+    }
+>
+    ${
+        matched
+        ? matched["Centre Address"]
+        : "ADDRESS NOT FOUND"
+    }
+</td>
         <td>${description}</td>
         <td>${qty}</td>
         <td>${uom}</td>
@@ -528,11 +552,15 @@ const wsSummary =
     
 console.table(exportRows.slice(-20));
     
-    XLSX.writeFile(
-        wb,
-        "NTUC_DO.xlsx"
-    );
+    const today =
+    new Date()
+        .toISOString()
+        .slice(0, 10);
 
+XLSX.writeFile(
+    wb,
+    `NTUC_${today}.xlsx`
+);
 });
 
 document
