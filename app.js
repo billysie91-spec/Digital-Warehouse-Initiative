@@ -143,6 +143,42 @@ if (textContent.items.length > 0) {
         p
     );
 
+    const viewport =
+        page.getViewport({
+            scale: 2
+        });
+
+    const canvas =
+        document.createElement("canvas");
+
+    const ctx =
+        canvas.getContext("2d");
+
+    canvas.width =
+        viewport.width;
+
+    canvas.height =
+        viewport.height;
+
+    await page.render({
+        canvasContext: ctx,
+        viewport
+    }).promise;
+
+    const result =
+        await Tesseract.recognize(
+            canvas,
+            "eng"
+        );
+
+    text =
+        result.data.text;
+
+    console.log(
+        "OCR TEXT:",
+        text.substring(0, 500)
+    );
+
 }
 
     const lines = text
