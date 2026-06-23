@@ -119,6 +119,7 @@ for (let p = 1; p <= pdf.numPages; p++) {
 
     const textContent =
         await page.getTextContent();
+    
     console.log(
     "PAGE",
     pageNum,
