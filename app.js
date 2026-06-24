@@ -482,7 +482,10 @@ exportRows.push({
     <td>${uom}</td>
 </tr>
 `;
-}
+        }
+
+    }
+
 });
 
 html += "</table>";
