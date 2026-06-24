@@ -3,8 +3,8 @@ let exportRows = [];
 const recipeMap = {
 
     "Fish with Garlic Bean Sauce": [
-        "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
-        "Sauce\\Garlic Bean\\Fz\\250G"
+        "Fish\\Cube\\8-15g\\Cooked\\600g",
+        "Sauce\\Garlic Soy\\FZ\\250G"
     ],
 
     "Tangy Soy Fish": [
@@ -234,7 +234,7 @@ const outletName =
 String(r.outlet)
     .replace(/limited/gi, "")
     .trim()
-    .toLowerCase();
+    .toLowerCase()
 
 const candidates =
     addressMaster.filter(x => {
@@ -248,6 +248,16 @@ const candidates =
     normalizeOutlet(
         r.outlet
     );
+
+console.log(
+    "PDF OUTLET:",
+    r.outlet
+);
+
+console.log(
+    "PDF NORMALIZED:",
+    pdfName
+);
         
         return (
             masterName === pdfName ||
@@ -255,7 +265,12 @@ const candidates =
         );
 
     });
-               
+        
+console.log(
+    "Candidates Count:",
+    candidates.length
+);
+        
 let matched = null;
 
 if (candidates.length === 1) {
@@ -324,7 +339,7 @@ matched =
         }
     }
 }
-        
+      
         html += `
         <tr>
             <td>${r.outlet}</td>
@@ -371,7 +386,7 @@ const outletName =
 String(r.outlet)
     .replace(/limited/gi, "")
     .trim()
-    .toLowerCase();
+    .toLowerCase()
 
 const candidates =
     addressMaster.filter(x => {
@@ -403,23 +418,23 @@ if (candidates.length === 1) {
 else if (candidates.length > 1) {
 
     const pdfBlk =
-        extractBlk(r.address);
+    extractBlk(r.address);
 
-    matched =
-        candidates.find(x => {
+matched =
+    candidates.find(x => {
 
-            const masterBlk =
-                extractBlk(
-                    x["Centre Address"]
-                );
+        const masterBlk =
+            extractBlk(
+                x["Centre Address"]
+            );
 
-            return masterBlk === pdfBlk;
+        return masterBlk === pdfBlk;
 
-        });
+    });
 
-}
+    if (!matched) {
 
-if (!matched) {
+    unmatchedCount++;
 
     console.warn(
         "Address not found:",
@@ -447,32 +462,29 @@ exportRows.push({
 });
 
     html += `
-<tr>
-    <td>${r.outlet}</td>
-    <td
-        ${
-            matched
-            ? ""
-            : 'style="background:#ffcccc;font-weight:bold;"'
-        }
-    >
-        ${
-            matched
-            ? matched["Centre Address"]
-            : "ADDRESS NOT FOUND"
-        }
-    </td>
-    <td>${description}</td>
-    <td>${qty}</td>
-    <td>${uom}</td>
-</tr>
-`;
-            });
-
-        }
-
+    <tr>
+        <td>${r.outlet}</td>
+        <td
+    ${
+        matched
+        ? ""
+        : 'style="background:#ffcccc;font-weight:bold;"'
     }
-
+>
+    ${
+        matched
+        ? matched["Centre Address"]
+        : "ADDRESS NOT FOUND"
+    }
+</td>
+        <td>${description}</td>
+        <td>${qty}</td>
+        <td>${uom}</td>
+    </tr>
+    `;
+}
+        }
+    }
 });
 
 html += "</table>";
