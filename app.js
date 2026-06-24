@@ -3,7 +3,7 @@ let exportRows = [];
 const recipeMap = {
 
     "Fish with Garlic Bean Sauce": [
-        "Fish\\Cube\\8-15g\\Cooked\\600g",
+        "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
         "Sauce\\Garlic Bean\\Fz\\250G"
     ],
 
