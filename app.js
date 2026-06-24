@@ -462,29 +462,28 @@ exportRows.push({
 });
 
     html += `
-    <tr>
-        <td>${r.outlet}</td>
-        <td
-    ${
-        matched
-        ? ""
-        : 'style="background:#ffcccc;font-weight:bold;"'
-    }
->
-    ${
-        matched
-        ? matched["Centre Address"]
-        : "ADDRESS NOT FOUND"
-    }
-</td>
-        <td>${description}</td>
-        <td>${qty}</td>
-        <td>${uom}</td>
-    </tr>
-    `;
-}
+<tr>
+    <td>${r.outlet}</td>
+    <td
+        ${
+            matched
+            ? ""
+            : 'style="background:#ffcccc;font-weight:bold;"'
         }
-    }
+    >
+        ${
+            matched
+            ? matched["Centre Address"]
+            : "ADDRESS NOT FOUND"
+        }
+    </td>
+    <td>${description}</td>
+    <td>${qty}</td>
+    <td>${uom}</td>
+</tr>
+`;
+
+}
 });
 
 html += "</table>";
