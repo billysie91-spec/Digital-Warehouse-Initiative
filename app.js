@@ -338,7 +338,6 @@ matched =
         matched = candidates[0];
         }
     }
-}
       
         html += `
         <tr>
