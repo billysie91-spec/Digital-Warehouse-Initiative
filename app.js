@@ -418,23 +418,23 @@ if (candidates.length === 1) {
 else if (candidates.length > 1) {
 
     const pdfBlk =
-    extractBlk(r.address);
+        extractBlk(r.address);
 
-matched =
-    candidates.find(x => {
+    matched =
+        candidates.find(x => {
 
-        const masterBlk =
-            extractBlk(
-                x["Centre Address"]
-            );
+            const masterBlk =
+                extractBlk(
+                    x["Centre Address"]
+                );
 
-        return masterBlk === pdfBlk;
+            return masterBlk === pdfBlk;
 
-    });
+        });
 
-    if (!matched) {
+}
 
-    unmatchedCount++;
+if (!matched) {
 
     console.warn(
         "Address not found:",
