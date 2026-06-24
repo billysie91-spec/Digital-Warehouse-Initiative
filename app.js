@@ -234,7 +234,7 @@ const outletName =
 String(r.outlet)
     .replace(/limited/gi, "")
     .trim()
-    .toLowerCase()
+    .toLowerCase();
 
 const candidates =
     addressMaster.filter(x => {
@@ -248,16 +248,6 @@ const candidates =
     normalizeOutlet(
         r.outlet
     );
-
-console.log(
-    "PDF OUTLET:",
-    r.outlet
-);
-
-console.log(
-    "PDF NORMALIZED:",
-    pdfName
-);
         
         return (
             masterName === pdfName ||
@@ -265,12 +255,7 @@ console.log(
         );
 
     });
-        
-console.log(
-    "Candidates Count:",
-    candidates.length
-);
-        
+               
 let matched = null;
 
 if (candidates.length === 1) {
@@ -386,7 +371,7 @@ const outletName =
 String(r.outlet)
     .replace(/limited/gi, "")
     .trim()
-    .toLowerCase()
+    .toLowerCase();
 
 const candidates =
     addressMaster.filter(x => {
