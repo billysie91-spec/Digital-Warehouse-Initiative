@@ -338,7 +338,8 @@ matched =
         matched = candidates[0];
         }
     }
-      
+}
+        
         html += `
         <tr>
             <td>${r.outlet}</td>
