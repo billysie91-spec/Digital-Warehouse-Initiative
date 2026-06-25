@@ -280,6 +280,15 @@ console.log(
     "Candidates Count:",
     candidates.length
 );
+
+candidates.forEach(x => {
+    console.log(
+        "Candidate:",
+        x["Centre Name"],
+        "=>",
+        x["Centre Address"]
+    );
+});
         
 let matched = null;
 
