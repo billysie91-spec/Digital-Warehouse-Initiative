@@ -327,36 +327,16 @@ if (
 
 }
 
-if (
-    normalizeOutlet(r.outlet)
-        .includes("PIONEERBLK991CC")
-) {
+if (pdfAddress.includes("991 UPPER JURONG ROAD")) {
 
-    if (
-        pdfAddress.includes("991 UPPER JURONG ROAD")
-    ) {
+    console.log("PIONEER SPECIAL MATCH");
 
-        matched =
-            candidates.find(x =>
-                String(
-                    x["Centre Address"] || ""
-                )
+    matched =
+        candidates.find(x =>
+            String(x["Centre Address"] || "")
                 .toUpperCase()
                 .includes("991 UPPER JURONG ROAD")
-            );
-
-    } else {
-
-        matched =
-            candidates.find(x =>
-                String(
-                    x["Centre Address"] || ""
-                )
-                .toUpperCase()
-                .includes("987D JURONG WEST STREET 93")
-            );
-
-    }
+        );
 
 }
     
