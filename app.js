@@ -78,7 +78,7 @@ function extractBlk(text) {
     }
 
     m =
-        s.match(/^(\d+[A-Z]?)/);
+        s.match(/^(\d+[A-Z]?)\s/);
 
     if (m) {
         return m[1];
@@ -280,15 +280,6 @@ console.log(
     "Candidates Count:",
     candidates.length
 );
-
-candidates.forEach(x => {
-    console.log(
-        "Candidate:",
-        x["Centre Name"],
-        "=>",
-        x["Centre Address"]
-    );
-});
         
 let matched = null;
 
@@ -394,16 +385,6 @@ String(r.outlet)
     .replace(/limited/gi, "")
     .trim()
     .toLowerCase()
-
-if (
-    !r.outlet ||
-    !r.outlet.trim() ||
-    !r.address ||
-    !r.address.trim()
-) {
-    console.warn("Skip empty row:", r);
-    return;
-}
 
 const candidates =
     addressMaster.filter(x => {
