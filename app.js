@@ -395,6 +395,16 @@ String(r.outlet)
     .trim()
     .toLowerCase()
 
+if (
+    !r.outlet ||
+    !r.outlet.trim() ||
+    !r.address ||
+    !r.address.trim()
+) {
+    console.warn("Skip empty row:", r);
+    return;
+}
+
 const candidates =
     addressMaster.filter(x => {
 
