@@ -446,22 +446,27 @@ if (candidates.length === 1) {
     matched = candidates[0];
 
 }
+    
 else if (candidates.length > 1) {
 
     const pdfBlk =
-    extractBlk(r.address);
+        extractBlk(r.address);
 
-matched =
-    candidates.find(x => {
+    if (!matched) {
 
-        const masterBlk =
-            extractBlk(
-                x["Centre Address"]
-            );
+        matched =
+            candidates.find(x => {
 
-        return masterBlk === pdfBlk;
+                const masterBlk =
+                    extractBlk(
+                        x["Centre Address"]
+                    );
 
-    });
+                return masterBlk === pdfBlk;
+
+            });
+
+    }
 
     if (!matched) {
         matched = candidates[0];
