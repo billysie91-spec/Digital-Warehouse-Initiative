@@ -184,6 +184,12 @@ if (
     rawText: text
 });
 
+  console.log(
+    "ROW:",
+    outlet,
+    address
+);
+    
 }
 
 let html = `
