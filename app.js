@@ -84,6 +84,13 @@ function extractBlk(text) {
         return m[1];
     }
 
+    m =
+        s.match(/^(\d+[A-Z]?),/);
+
+    if (m) {
+        return m[1];
+    }
+
     return "";
 }
 
