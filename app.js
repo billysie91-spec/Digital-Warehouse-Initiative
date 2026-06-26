@@ -184,7 +184,9 @@ if (
     }
 }
 
-    rows.push({
+console.log("BLOCK:", block);
+
+rows.push({
     outlet,
     address,
     rawText: text
