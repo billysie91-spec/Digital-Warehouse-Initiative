@@ -168,7 +168,7 @@ if (
     (
         /^(Blk|Bllk|lk)\s*/i.test(block[j]) ||
         /^No\.?\s*/i.test(block[j]) ||
-        /^\d+[A-Z]?\s/.test(block[j])
+        /^\d+[A-Z]?[,\s]/.test(block[j])
     ) &&
     !block[j].includes("(CC)") &&
     !block[j].includes("(DS)") &&
