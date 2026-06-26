@@ -7,7 +7,7 @@ const recipeMap = {
         "Sauce\\Garlic Bean\\Fz\\250G"
     ],
 
-    "Garlic soy Fish": [
+    "Garlic Soy Fish": [
         "Fish\\Cube\\8-15g\\Cooked\\600g",
         "Sauce\\Garlic soy\\Fz\\250G"
     ],
