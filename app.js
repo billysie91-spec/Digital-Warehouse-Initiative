@@ -303,6 +303,11 @@ else if (candidates.length > 1) {
     String(r.address || "")
         .toUpperCase();
 
+console.log(
+    "NORMALIZED:",
+    normalizeOutlet(r.outlet)
+);
+
 if (
     normalizeOutlet(r.outlet)
         .includes("NEESOONLINKBLK446CC")
