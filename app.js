@@ -303,41 +303,30 @@ else if (candidates.length > 1) {
     String(r.address || "")
         .toUpperCase();
 
-console.log(
-    "NORMALIZED:",
-    normalizeOutlet(r.outlet)
-);
-
 if (
-    normalizeOutlet(r.outlet)
-        .includes("NEESOONLINKBLK446CC")
+    pdfAddress.includes("YISHUN AVE 11")
 ) {
 
-    if (
-        pdfAddress.includes("YISHUN AVE 11")
-    ) {
-
-        matched =
-            candidates.find(x =>
-                String(
-                    x["Centre Address"] || ""
-                )
+    matched =
+        candidates.find(x =>
+            String(x["Centre Address"] || "")
                 .toUpperCase()
                 .includes("YISHUN AVE 11")
-            );
+        );
 
-    } else {
+}
+else if (
+    pdfAddress.includes("YISHUN RING ROAD")
+) {
 
-        matched =
-            candidates.find(x =>
-                String(
-                    x["Centre Address"] || ""
-                )
+    matched =
+        candidates.find(x =>
+            String(x["Centre Address"] || "")
                 .toUpperCase()
                 .includes("YISHUN RING ROAD")
-            );
+        );
 
-    }
+}
 
 }
 
