@@ -328,8 +328,6 @@ else if (
 
 }
 
-}
-
 if (pdfAddress.includes("991 UPPER JURONG ROAD")) {
 
     console.log("PIONEER SPECIAL MATCH");
