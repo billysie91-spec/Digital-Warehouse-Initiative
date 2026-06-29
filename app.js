@@ -303,21 +303,17 @@ else if (candidates.length > 1) {
     String(r.address || "")
         .toUpperCase();
 
-if (
-    pdfAddress.includes("YISHUN AVE 11")
-) {
+if (pdfAddress.includes("DELIVERY GO TO BLK 449")) {
 
     matched =
         candidates.find(x =>
             String(x["Centre Address"] || "")
                 .toUpperCase()
-                .includes("YISHUN AVE 11")
+                .includes("DELIVERY GO TO BLK 449")
         );
 
 }
-else if (
-    pdfAddress.includes("YISHUN RING ROAD")
-) {
+else if (pdfAddress.includes("YISHUN RING ROAD")) {
 
     matched =
         candidates.find(x =>
