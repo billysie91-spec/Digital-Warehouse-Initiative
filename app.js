@@ -303,6 +303,9 @@ else if (candidates.length > 1) {
     String(r.address || "")
         .toUpperCase();
 
+console.log("PDF ADDRESS RAW:", r.address);
+console.log("PDF ADDRESS UPPER:", pdfAddress);    
+
 if (pdfAddress.includes("DELIVERY GO TO BLK 449")) {
 
     matched =
