@@ -307,12 +307,16 @@ alert(pdfAddress);
 
 if (pdfAddress.includes("DELIVERY GO TO BLK 449")) {
 
+    console.log(">>> YISHUN SPECIAL <<<");
+
     matched =
         candidates.find(x =>
             String(x["Centre Address"] || "")
                 .toUpperCase()
                 .includes("DELIVERY GO TO BLK 449")
         );
+
+    console.log("SPECIAL MATCH:", matched);
 
 }
 else if (pdfAddress.includes("YISHUN RING ROAD")) {
