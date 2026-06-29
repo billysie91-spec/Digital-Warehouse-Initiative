@@ -305,18 +305,14 @@ else if (candidates.length > 1) {
 
 console.log("PDF ADDRESS =", JSON.stringify(pdfAddress));   
 
-if (pdfAddress.includes("DELIVERY GO TO BLK 449")) {
-
-    console.log(">>> YISHUN SPECIAL <<<");
+if (pdfAddress.includes("YISHUN AVE 11")) {
 
     matched =
         candidates.find(x =>
             String(x["Centre Address"] || "")
                 .toUpperCase()
-                .includes("DELIVERY GO TO BLK 449")
+                .includes("YISHUN AVE 11")
         );
-
-    console.log("SPECIAL MATCH:", matched);
 
 }
 else if (pdfAddress.includes("YISHUN RING ROAD")) {
