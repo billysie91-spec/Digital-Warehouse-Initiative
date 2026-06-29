@@ -303,7 +303,7 @@ else if (candidates.length > 1) {
     String(r.address || "")
         .toUpperCase();
 
-alert(pdfAddress);   
+console.log("PDF ADDRESS =", JSON.stringify(pdfAddress));   
 
 if (pdfAddress.includes("DELIVERY GO TO BLK 449")) {
 
