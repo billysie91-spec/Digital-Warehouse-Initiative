@@ -303,7 +303,7 @@ else if (candidates.length > 1) {
     String(r.address || "")
         .toUpperCase(); 
     
-    console.log(deliveryAddress);
+   console.log(r.address);
 
 if (pdfAddress.includes("YISHUN AVE 11")) {
 
