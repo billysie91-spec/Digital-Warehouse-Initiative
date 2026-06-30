@@ -307,14 +307,26 @@ else if (candidates.length > 1) {
 
 if (pdfAddress.includes("YISHUN AVE 11")) {
 
+    console.log("=== PDF IS YISHUN AVE 11 ===");
+
     matched =
-        candidates.find(x =>
-            String(x["Centre Address"] || "")
+        candidates.find(x => {
+
+            console.log(
+                "MASTER:",
+                x["Centre Address"]
+            );
+
+            return String(x["Centre Address"] || "")
                 .toUpperCase()
-                .includes("YISHUN AVE 11")
-        );
+                .includes("YISHUN AVE 11");
+
+        });
+
+    console.log("MATCHED:", matched);
 
 }
+    
 else if (pdfAddress.includes("YISHUN RING ROAD")) {
 
     matched =
