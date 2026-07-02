@@ -7,15 +7,51 @@ const recipeMap = {
         "Sauce\\Garlic Bean\\Fz\\250G"
     ],
 
+    "Fish with Hong Kong Soy Sauce": [
+        "Fish\\Cube\\8-15g\\Cooked\\600g",
+        "Sauce\\HK Soy\\FZ\\250G"
+    ],
+    
     "Garlic Soy Fish": [
         "Fish\\Cube\\8-15g\\Cooked\\600g",
         "Sauce\\Garlic soy\\Fz\\250G"
+    ],
+
+    "Mediterranean Fish": [
+        "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
+        "Sauce\\Mediterranean\\Fz\\250G"
     ],
     
     "Tangy Soy Fish": [
         "Fish\\Cube\\8-15g\\Cooked\\600g",
         "Sauce\\Tangy Soy\\Fz\\250G"
-    ]
+    ],
+
+    "Teriyaki Baked Fish": [
+    "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
+    "Sauce\\Teriyaki\\FZ\\250g"
+],
+
+"Sweet and Sour Fish": [
+    "Fish\\Cube\\8-15g\\Cooked\\600g",
+    "Sauce\\Sweet N Sour\\FZ\\250G"
+],
+
+"Fish with Chinese Style Onion Sauce": [
+    "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
+    "Sauce\\Chinese Style Onion\\Fz\\250G"
+],
+
+"Oriental Fish": [
+    "Fish\\Cube\\8-15g\\Cooked\\600g",
+    "Sauce\\Oriental Sweet\\FZ\\250g"
+],
+
+"Kam Heong Fish": [
+    "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
+    "Sauce\\Kam Heong\\Fz\\250G"
+]
+    
 };
 
 let addressMaster = [];
