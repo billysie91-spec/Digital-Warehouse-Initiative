@@ -134,6 +134,15 @@ document.getElementById("processBtn").addEventListener("click", async () => {
 
     const file =
         document.getElementById("pdfFile").files[0];
+    
+    let fileDate = "";
+
+const match =
+    file.name.match(/(\d{2}_\d{2}_\d{4})/);
+
+if (match) {
+    fileDate = match[1].replace(/_/g, ".");
+}
 
     if (!file) {
         alert("Please select a PDF file");
@@ -605,10 +614,15 @@ const wsSummary =
     
 console.table(exportRows.slice(-20));
     
-    XLSX.writeFile(
-        wb,
-        "NTUC_DO.xlsx"
-    );
+    const fileName =
+    fileDate
+        ? `NTUC_DO-${fileDate}.xlsx`
+        : "NTUC_DO.xlsx";
+
+XLSX.writeFile(
+    wb,
+    fileName
+);
 
 });
 
