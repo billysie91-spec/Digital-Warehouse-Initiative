@@ -1,4 +1,5 @@
 let exportRows = [];
+let pdfDate = "";
 
 const recipeMap = {
 
@@ -139,15 +140,14 @@ document.getElementById("processBtn").addEventListener("click", async () => {
         alert("Please select a PDF file");
         return;
     }
-
-    let fileDate = "";
-
+    
     const match =
-        file.name.match(/(\d{2}_\d{2}_\d{4})/);
+    file.name.match(/(\d{2}_\d{2}_\d{4})/);
 
-    if (match) {
-        fileDate = match[1].replace(/_/g, ".");
-    }
+pdfDate =
+    match
+        ? match[1].replace(/_/g, ".")
+        : "";
 
     document.getElementById("status").innerHTML =
         "Reading PDF...";
@@ -612,11 +612,9 @@ const wsSummary =
     "Summary"
 );
     
-console.table(exportRows.slice(-20));
-    
-    const fileName =
-    fileDate
-        ? `NTUC_DO-${fileDate}.xlsx`
+const fileName =
+    pdfDate
+        ? `NTUC_DO-${pdfDate}.xlsx`
         : "NTUC_DO.xlsx";
 
 XLSX.writeFile(
