@@ -5,14 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NTUC Delivery Order Converter | FLOW SERVICES</title>
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <!-- PDF.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
@@ -27,139 +19,37 @@
 </head>
 
 <body>
-    <div class="page-wrapper">
-        <!-- Navigation Bar -->
-        <nav class="navbar">
-            <div class="navbar-container">
-                <div class="navbar-brand">
-                    <img src="logo.png" alt="FLOW SERVICES" class="navbar-logo">
-                    <span class="navbar-title">FLOW SERVICES</span>
-                </div>
-                <div class="navbar-info">
-                    <span class="navbar-subtitle">NTUC Delivery Order Converter</span>
-                </div>
-            </div>
-        </nav>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <img src="logo.png" alt="FLOW SERVICES" class="logo">
+            <h1>FLOW SERVICES PTE LTD</h1>
+            <p>NTUC Foodfare Delivery Order Converter</p>
+        </div>
 
-        <!-- Main Container -->
-        <div class="container">
-            
-            <!-- Header Section -->
-            <header class="header-section">
-                <div class="header-content">
-                    <h1 class="page-title">
-                        <i class="fas fa-file-pdf"></i>
-                        Delivery Order Processor
-                    </h1>
-                    <p class="page-subtitle">
-                        Convert NTUC PDF documents and export organized delivery data
-                    </p>
-                </div>
-            </header>
+        <!-- File Upload Section -->
+        <div class="form-section">
+            <label><b>📄 NTUC PDF</b></label>
+            <input type="file" id="pdfFile" accept=".pdf">
+        </div>
 
-            <!-- Main Content Grid -->
-            <div class="content-grid">
-                
-                <!-- Left Panel: Upload Section -->
-                <section class="panel upload-panel">
-                    <div class="panel-header">
-                        <h2 class="panel-title">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            Upload Files
-                        </h2>
-                        <p class="panel-subtitle">Select your PDF and address master files</p>
-                    </div>
+        <div class="form-section">
+            <label><b>📊 Address Master</b></label>
+            <input type="file" id="masterFile" accept=".xlsx,.xls">
+        </div>
 
-                    <div class="panel-body">
-                        <!-- PDF Upload -->
-                        <div class="upload-group">
-                            <label class="upload-label">
-                                <i class="fas fa-file-pdf"></i>
-                                <span>NTUC Delivery Order PDF</span>
-                            </label>
-                            <div class="file-input-wrapper">
-                                <input 
-                                    type="file" 
-                                    id="pdfFile" 
-                                    class="file-input"
-                                    accept=".pdf"
-                                    aria-label="Upload PDF file">
-                                <div class="file-input-display">
-                                    <i class="fas fa-file-pdf"></i>
-                                    <span id="pdfFileName" class="file-name">No file selected</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Address Master Upload -->
-                        <div class="upload-group">
-                            <label class="upload-label">
-                                <i class="fas fa-table"></i>
-                                <span>Address Master (Excel)</span>
-                            </label>
-                            <div class="file-input-wrapper">
-                                <input 
-                                    type="file" 
-                                    id="masterFile" 
-                                    class="file-input"
-                                    accept=".xlsx,.xls"
-                                    aria-label="Upload Excel file">
-                                <div class="file-input-display">
-                                    <i class="fas fa-file-excel"></i>
-                                    <span id="masterFileName" class="file-name">No file selected</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="button-group">
-                            <button id="processBtn" class="btn btn-primary btn-lg">
-                                <i class="fas fa-play"></i>
-                                <span>Convert PDF</span>
-                            </button>
-                            <button id="exportBtn" class="btn btn-secondary btn-lg">
-                                <i class="fas fa-download"></i>
-                                <span>Export Excel</span>
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Right Panel: Status & Results -->
-                <section class="panel results-panel">
-                    <div class="panel-header">
-                        <h2 class="panel-title">
-                            <i class="fas fa-clipboard-list"></i>
-                            Processing Status
-                        </h2>
-                    </div>
-
-                    <div class="panel-body">
-                        <!-- Status Display -->
-                        <div id="status" class="status-container">
-                            <div class="status-idle">
-                                <i class="fas fa-circle-info"></i>
-                                <p>Upload files and click "Convert PDF" to begin processing</p>
-                            </div>
-                        </div>
-
-                        <!-- Results Table Preview -->
-                        <div id="results" class="results-container">
-                            <!-- Table will be inserted here -->
-                        </div>
-                    </div>
-                </section>
-
+        <!-- Action Buttons -->
+        <div class="form-section" style="border-bottom: none;">
+            <div class="button-group">
+                <button id="processBtn">Convert PDF</button>
+                <button id="exportBtn">Export Excel</button>
             </div>
 
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-content">
-                    <p>&copy; 2024 FLOW SERVICES PTE LTD. All rights reserved.</p>
-                    <p class="footer-info">Digital Warehouse Initiative v1.0</p>
-                </div>
-            </footer>
+            <!-- Status Display -->
+            <div id="status"></div>
 
+            <!-- Results Table -->
+            <div id="results"></div>
         </div>
     </div>
 
