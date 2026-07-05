@@ -1,22 +1,458 @@
-body{font-family:Arial;background:#f5f5f5;padding:40px}
-.container{background:white;padding:20px;border-radius:8px}
+/* ============================================
+   Root Variables
+   ============================================ */
 
-.header{
-    text-align:center;
-    margin-bottom:30px;
+:root {
+    --primary-color: #007bff;
+    --primary-dark: #0056b3;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --gray: #e9ecef;
+    --dark-gray: #6c757d;
+    --text-dark: #212529;
+    --text-light: #6c757d;
+    
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.logo{
-    height:150px;
-    width:auto;
+/* ============================================
+   Global Reset & Base Styles
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.header h1{
-    font-size:36px;
-    margin:10px 0;
+html {
+    scroll-behavior: smooth;
 }
 
-.header p{
-    font-size:18px;
-    margin:0;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text-dark);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Container & Layout
+   ============================================ */
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+}
+
+/* ============================================
+   Header Styles
+   ============================================ */
+
+.header {
+    text-align: center;
+    padding: 50px 30px 40px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-bottom: 2px solid var(--gray);
+}
+
+.logo {
+    height: 80px;
+    width: auto;
+    margin-bottom: 20px;
+    display: inline-block;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 15px 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+.header p {
+    font-size: 16px;
+    color: var(--text-light);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ============================================
+   Form Sections
+   ============================================ */
+
+.form-section {
+    padding: 30px;
+    border-bottom: 1px solid var(--gray);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* ============================================
+   Labels & Input Styles
+   ============================================ */
+
+label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--gray);
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    background-color: var(--light-gray);
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: var(--primary-color);
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+input[type="file"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+/* ============================================
+   Button Styles
+   ============================================ */
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow-sm);
+    user-select: none;
+    white-space: nowrap;
+}
+
+button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#processBtn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: var(--white);
+    flex: 1;
+    min-width: 150px;
+}
+
+#processBtn:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, #003a7a 100%);
+}
+
+#exportBtn {
+    background: var(--success-color);
+    color: var(--white);
+    flex: 1;
+    min-width: 150px;
+}
+
+#exportBtn:hover:not(:disabled) {
+    background: #218838;
+}
+
+/* ============================================
+   Status Display
+   ============================================ */
+
+#status {
+    margin-top: 30px;
+    padding: 16px 20px;
+    border-radius: 6px;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    background-color: rgba(23, 162, 184, 0.1);
+    border-left: 4px solid var(--info-color);
+    color: var(--text-dark);
+}
+
+#status.status-info {
+    background-color: rgba(23, 162, 184, 0.1);
+    border-left-color: var(--info-color);
+}
+
+#status.status-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-left-color: var(--success-color);
+}
+
+#status.status-error {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left-color: var(--danger-color);
+}
+
+#status i {
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   Results Table
+   ============================================ */
+
+#results {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+#results table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+#results thead {
+    background: linear-gradient(135deg, #f0f0f0 0%, #e9ecef 100%);
+}
+
+#results th {
+    padding: 14px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-dark);
+    border-bottom: 2px solid var(--gray);
+    white-space: nowrap;
+}
+
+#results td {
+    padding: 12px;
+    border-bottom: 1px solid var(--gray);
+    word-break: break-word;
+}
+
+#results tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+#results tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+#results tbody tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        border-radius: 8px;
+    }
+
+    .header {
+        padding: 30px 20px 25px;
+    }
+
+    .logo {
+        height: 60px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header p {
+        font-size: 14px;
+    }
+
+    .form-section {
+        padding: 20px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    #processBtn,
+    #exportBtn {
+        width: 100%;
+    }
+
+    #results {
+        font-size: 12px;
+        overflow-x: auto;
+    }
+
+    #results th,
+    #results td {
+        padding: 10px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        margin: 10px auto;
+        border-radius: 6px;
+    }
+
+    .header {
+        padding: 25px 15px 20px;
+    }
+
+    .logo {
+        height: 50px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .header p {
+        font-size: 13px;
+    }
+
+    .form-section {
+        padding: 15px;
+    }
+
+    label {
+        font-size: 13px;
+    }
+
+    input[type="file"] {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    button {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+
+    #status {
+        padding: 12px 16px;
+        font-size: 12px;
+    }
+
+    #results {
+        font-size: 11px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    #results table {
+        min-width: 600px;
+    }
+
+    #results th,
+    #results td {
+        padding: 8px 6px;
+    }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#results table {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+
+@media print {
+    body {
+        background: var(--white);
+    }
+
+    .container {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .button-group,
+    #status {
+        display: none;
+    }
+
+    .header {
+        border-bottom: 1px solid var(--gray);
+    }
+
+    #results {
+        page-break-inside: avoid;
+    }
 }
