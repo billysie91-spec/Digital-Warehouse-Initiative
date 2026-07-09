@@ -289,12 +289,6 @@ function isExcelFile(file) {
 function isAddressStartLine(line) {
     if (!line) return false;
     
-    // Check if line has any exclusion codes
-    for (const code of VALIDATION.EXCLUSION_CODES) {
-        if (line.includes(code)) return false;
-    }
-    
-    // Check if line matches outlet patterns
     for (const pattern of VALIDATION.OUTLET_PATTERNS) {
         if (pattern.test(line)) return true;
     }
@@ -404,7 +398,7 @@ function findCandidates(outletName) {
     
     return state.addressMaster.filter(x => {
         const masterName = normalize(x["Centre Name"] || "");
-        return masterName === pdfName || masterName.startsWith(pdfName);
+        return masterName.includes(pdfName) || pdfName.includes(masterName);
     });
 }
 
