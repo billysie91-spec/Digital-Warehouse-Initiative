@@ -78,11 +78,7 @@ const SPECIAL_LOCATION_MATCHES = [
         find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("YISHUN AVE 11"),
         label: "YISHUN AVE 11"
     },
-    {
-        check: (addr) => addr.includes("YISHUN RING ROAD"),
-        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("YISHUN RING ROAD"),
-        label: "YISHUN RING ROAD"
-    },
+
     {
         check: (addr) => addr.includes("991 UPPER JURONG ROAD"),
         find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("991 UPPER JURONG ROAD"),
@@ -228,11 +224,12 @@ function extractBlk(text) {
     const s = String(text).toUpperCase();
     
     const patterns = [
-        /DELIVERY\s+GO\s+TO\s+BLK\s*(\d+[A-Z]?)/,
-        /BLK\s*(\d+[A-Z]?)/,
-        /^(\d+[A-Z]?)\s/,
-        /^(\d+[A-Z]?),/
-    ];
+    /DELIVERY\s+GO\s+TO\s+BLK\s*(\d+[A-Z]?)/,
+    /BLK\s*(\d+[A-Z]?)/,
+    /NO\.?\s*(\d+[A-Z]?)/,
+    /^(\d+[A-Z]?)\s/,
+    /^(\d+[A-Z]?),/
+];
     
     for (const pattern of patterns) {
         const match = s.match(pattern);
@@ -305,17 +302,34 @@ function extractOutletAndAddress(block) {
     if (!Array.isArray(block) || block.length === 0) {
         return { outlet: "", address: "" };
     }
-    
+
     for (let j = 0; j < block.length; j++) {
+
         if (isAddressStartLine(block[j])) {
+
+            // 前一行像 "585 (CC)"、"301 (DS)"、"108 (CC)"
+            // 其实还是 Outlet 的一部分
+            if (
+                j > 0 &&
+                /^\d+[A-Z]?\s*\((CC|DS|EY)\)$/i.test(block[j - 1])
+            ) {
+                return {
+                    outlet: block.slice(0, j).join(" "),
+                    address: block.slice(j).join(" ")
+                };
+            }
+
             return {
                 outlet: block.slice(0, j).join(" "),
                 address: block.slice(j).join(" ")
             };
         }
     }
-    
-    return { outlet: "", address: "" };
+
+    return {
+        outlet: block.join(" "),
+        address: ""
+    };
 }
 
 /**
@@ -417,34 +431,48 @@ function findCandidates(outletName) {
  * @returns {Object} Matched address record or null
  */
 function matchAddress(candidates, pdfAddress) {
-    if (!Array.isArray(candidates) || candidates.length === 0) return null;
-    if (candidates.length === 1) return candidates[0];
-    
-    const pdfAddressUpper = String(pdfAddress || "").toUpperCase();
-    
-    // Try special location matches
-    for (const { check, find, label } of SPECIAL_LOCATION_MATCHES) {
-        if (check(pdfAddressUpper)) {
-            const match = candidates.find(find);
-            if (match) {
-                logDebug('ADDRESS_MATCH', `Special match found: ${label}`);
-                return match;
-            }
-        }
-    }
-    
-    // Fall back to block number matching
+
+    if (!Array.isArray(candidates) || candidates.length === 0)
+        return null;
+
+    if (candidates.length === 1)
+        return candidates[0];
+
+    const pdfAddr = normalize(pdfAddress, "address");
     const pdfBlk = extractBlk(pdfAddress);
+
+    // 1. Address 最优先
+    let matched = candidates.find(x => {
+        const addr = normalize(x["Centre Address"], "address");
+        return pdfAddr.includes(addr) || addr.includes(pdfAddr);
+    });
+
+    if (matched) return matched;
+
+    // 2. Block
     if (pdfBlk) {
-        const matched = candidates.find(x => extractBlk(x["Centre Address"] || "") === pdfBlk);
-        if (matched) {
-            logDebug('ADDRESS_MATCH', `Block number match: ${pdfBlk}`);
-            return matched;
+
+        matched = candidates.find(x =>
+            extractBlk(x["Centre Address"]) === pdfBlk
+        );
+
+        if (matched) return matched;
+    }
+
+    // 3. Special
+    const pdfUpper = pdfAddress.toUpperCase();
+
+    for (const { check, find } of SPECIAL_LOCATION_MATCHES) {
+
+        if (check(pdfUpper)) {
+
+            matched = candidates.find(find);
+
+            if (matched)
+                return matched;
         }
     }
-    
-    // Default to first candidate
-    logDebug('ADDRESS_MATCH', 'Using first candidate as fallback');
+
     return candidates[0];
 }
 
