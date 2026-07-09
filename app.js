@@ -50,7 +50,7 @@ const NORMALIZATION_RULES = {
         { pattern: /LIMITED/g, replacement: "" },
         { pattern: /@/g, replacement: "" },
         { pattern: /\./g, replacement: "" },
-        { pattern: /-/g, replacement: "" },
+        { pattern: /-\d+$/g, replacement: "" },
         { pattern: /[()]/g, replacement: "" },
         { pattern: /\s+/g, replacement: "" }
     ],
@@ -393,12 +393,20 @@ async function parsePdfPage(page) {
  */
 function findCandidates(outletName) {
     if (!outletName || state.addressMaster.length === 0) return [];
-    
+
     const pdfName = normalize(outletName);
-    
+
     return state.addressMaster.filter(x => {
         const masterName = normalize(x["Centre Name"] || "");
-        return masterName.includes(pdfName) || pdfName.includes(masterName);
+
+        // 完全一样
+        if (masterName === pdfName) {
+            return true;
+        }
+
+        // 只接受 -1、-2、-3... 的分店
+        const branchPattern = new RegExp("^" + pdfName + "\\d+$");
+        return branchPattern.test(masterName);
     });
 }
 
