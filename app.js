@@ -414,9 +414,25 @@ function findCandidates(outletName) {
  * @param {string} pdfAddress - Address from PDF
  * @returns {Object} Matched address record or null
  */
-function matchAddress(candidates, pdfAddress) {
+function matchAddress(candidates, pdfAddress, outletName) {
     if (!Array.isArray(candidates) || candidates.length === 0) return null;
     if (candidates.length === 1) return candidates[0];
+    // ===== Temporary fixes =====
+const pdfName = normalize(outletName);
+
+if (pdfName === normalize("PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)")) {
+    const found = candidates.find(x =>
+        String(x["Centre Name"]).includes("(CC)-1")
+    );
+    if (found) return found;
+}
+
+if (pdfName === normalize("PCF Sparkletots Preschool @ Marsiling (CC)-1")) {
+    const found = candidates.find(x =>
+        String(x["Centre Name"]) === "PCF Sparkletots Preschool @ Marsiling (CC)"
+    );
+    if (found) return found;
+}
     
     const pdfAddressUpper = String(pdfAddress || "").toUpperCase();
     
@@ -542,7 +558,11 @@ function createExportRow(outlet, matched, description, qty, uom) {
  */
 function processRecipeItem(outlet, description, qty, uom) {
     const candidates = findCandidates(outlet.outlet);
-    const matched = matchAddress(candidates, outlet.address);
+    const matched = matchAddress(
+    candidates,
+    outlet.address,
+    outlet.outlet
+);
     
     const recipeItems = RECIPE_MAP[description] || [];
     let html = "";
@@ -565,7 +585,11 @@ function processRecipeItem(outlet, description, qty, uom) {
  */
 function processRegularItem(outlet, description, qty, uom) {
     const candidates = findCandidates(outlet.outlet);
-    const matched = matchAddress(candidates, outlet.address);
+    const matched = matchAddress(
+    candidates,
+    outlet.address,
+    outlet.outlet
+);
     
     const html = generateTableRow(outlet, matched, description, qty, uom);
     state.exportRows.push(createExportRow(outlet, matched, description, qty, uom));
