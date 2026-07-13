@@ -420,6 +420,14 @@ function matchAddress(candidates, pdfAddress, outletName) {
     // ===== Temporary fixes =====
 const pdfName = normalize(outletName);
 
+console.log("==========");
+console.log("Outlet Name:", outletName);
+console.log("Normalized:", pdfName);
+console.log(
+    "Candidates:",
+    candidates.map(x => x["Centre Name"])
+);    
+
 if (pdfName === normalize("PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)")) {
     const found = candidates.find(x =>
         String(x["Centre Name"]).includes("(CC)-1")
