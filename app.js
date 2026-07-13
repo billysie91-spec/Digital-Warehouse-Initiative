@@ -28,7 +28,7 @@ const RECIPE_MAP = {
         "Sauce\\Teriyaki\\FZ\\250g"
     ],
     "Sweet and Sour Fish": [
-        "Fish\\Cube\\8-15g\\Cooked\\600g\\RED",
+        "Fish\\Cube\\8-15g\\Cooked\\600g",
         "Sauce\\Sweet N Sour\\FZ\\250G"
     ],
     "Fish with Chinese Style Onion Sauce": [
