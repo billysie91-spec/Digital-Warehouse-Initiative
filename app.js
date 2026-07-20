@@ -72,6 +72,24 @@ const NORMALIZATION_RULES = {
     ]
 };
 
+const SPECIAL_LOCATION_MATCHES = [
+    {
+        check: (addr) => addr.includes("YISHUN AVE 11"),
+        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("YISHUN AVE 11"),
+        label: "YISHUN AVE 11"
+    },
+    {
+        check: (addr) => addr.includes("YISHUN RING ROAD"),
+        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("YISHUN RING ROAD"),
+        label: "YISHUN RING ROAD"
+    },
+    {
+        check: (addr) => addr.includes("991 UPPER JURONG ROAD"),
+        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("991 UPPER JURONG ROAD"),
+        label: "PIONEER (991 UPPER JURONG ROAD)"
+    }
+];
+
 const DOM_ELEMENTS = {
     processBtn: null,
     exportBtn: null,
