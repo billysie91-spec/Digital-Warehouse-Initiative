@@ -474,15 +474,26 @@ if (outletOverride) {
 }
     
     // Try special location matches
-    for (const { check, find, label } of SPECIAL_LOCATION_MATCHES) {
-        if (check(pdfAddressUpper)) {
-            const match = candidates.find(find);
-            if (match) {
-                logDebug('ADDRESS_MATCH', `Special match found: ${label}`);
-                return match;
-            }
+for (const { check, find, label } of SPECIAL_LOCATION_MATCHES) {
+
+    if (check(pdfAddress)) {
+
+        const match = candidates.find(find);
+
+        if (match) {
+
+            logDebug(
+                "ADDRESS_MATCH",
+                `Special match found: ${label}`
+            );
+
+            return match;
+
         }
+
     }
+
+}
     
     // Fall back to block number matching
     const pdfBlk = extractBlk(pdfAddress);
