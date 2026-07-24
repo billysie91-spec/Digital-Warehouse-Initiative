@@ -94,15 +94,23 @@ const SPECIAL_LOCATION_MATCHES = [
 const SPECIAL_OUTLET_MATCHES = [
     {
         outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)",
+        addressContains: "BLK 114",
         centre: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1"
     },
     {
-        outlet: "PCF Sparkletots Preschool @ Marsiling (CC)-1",
+        outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)",
+        addressContains: "BLK 115B",
+        centre: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)"
+    },
+    {
+        outlet: "PCF Sparkletots Preschool @ Marsiling (CC)",
+        addressContains: "NO 9 WOODLANDS STREET 12",
         centre: "PCF Sparkletots Preschool @ Marsiling (CC)"
     },
     {
-        outlet: "XXXXX",
-        centre: "YYYYY"
+        outlet: "PCF Sparkletots Preschool @ Marsiling (CC)",
+        addressContains: "BLK 101",
+        centre: "PCF Sparkletots Preschool @ Marsiling (CC)-1"
     }
 ];
 
@@ -434,22 +442,32 @@ function matchAddress(candidates, pdfAddress, outletName) {
     if (!Array.isArray(candidates) || candidates.length === 0) return null;
     if (candidates.length === 1) return candidates[0];
     
-   // ===== Outlet Override =====
+  // ===== Outlet Override =====
+
+const pdfOutlet = normalize(outletName);
+const pdfAddressUpper = String(pdfAddress || "").toUpperCase();
 
 const outletOverride = SPECIAL_OUTLET_MATCHES.find(x =>
-    normalize(x.outlet) === normalize(outletName)
+    normalize(x.outlet) === pdfOutlet &&
+    pdfAddressUpper.includes(x.addressContains.toUpperCase())
 );
 
 if (outletOverride) {
 
     const matched = candidates.find(x =>
-        normalize(x["Centre Name"]) ===
+        normalize(x["Centre Name"] || "") ===
         normalize(outletOverride.centre)
     );
 
     if (matched) {
-        logDebug("ADDRESS_MATCH", `Outlet Override`);
+
+        logDebug(
+            "ADDRESS_MATCH",
+            `Outlet Override (${outletOverride.addressContains})`
+        );
+
         return matched;
+
     }
 }
     
