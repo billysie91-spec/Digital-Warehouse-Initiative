@@ -91,27 +91,29 @@ const SPECIAL_LOCATION_MATCHES = [
     }
 ];
 
-const SPECIAL_OUTLET_MATCHES = [
+const OUTLET_OVERRIDE_RULES = [
+
+    // Chong Pang
     {
         outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)",
-        addressContains: "BLK 114",
+        match: "BLK 114",
         centre: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1"
     },
-    {
-        outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)",
-        addressContains: "BLK 115B",
-        centre: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)"
-    },
+
+    // Marsiling
     {
         outlet: "PCF Sparkletots Preschool @ Marsiling (CC)",
-        addressContains: "9 WOODLANDS ST 12",
+        match: "WOODLANDS ST 12",
         centre: "PCF Sparkletots Preschool @ Marsiling (CC)"
     },
+
+    // Nee Soon Link
     {
-        outlet: "PCF Sparkletots Preschool @ Marsiling (CC)",
-        addressContains: "BLK 101",
-        centre: "PCF Sparkletots Preschool @ Marsiling (CC)-1"
+        outlet: "PCF Sparkletots Preschool @ Nee Soon Link Blk 446 (CC)",
+        match: "YISHUN AVE 11",
+        centre: "PCF Sparkletots Preschool @ Nee Soon Link Blk 446 (CC)-1"
     }
+
 ];
 
 const DOM_ELEMENTS = {
@@ -447,30 +449,36 @@ function matchAddress(candidates, pdfAddress, outletName) {
 const pdfOutlet = normalize(outletName);
 const pdfAddressNormalized = normalize(pdfAddress, "address");
 
-const outletOverride = SPECIAL_OUTLET_MATCHES.find(x =>
-    normalize(x.outlet) === pdfOutlet &&
+const outletOverride = OUTLET_OVERRIDE_RULES.find(rule =>
+
+    normalize(rule.outlet) === pdfOutlet &&
+
     pdfAddressNormalized.includes(
-        normalize(x.addressContains, "address")
+        normalize(rule.match, "address")
     )
+
 );
 
 if (outletOverride) {
 
     const matched = candidates.find(x =>
+
         normalize(x["Centre Name"] || "") ===
         normalize(outletOverride.centre)
+
     );
 
     if (matched) {
 
         logDebug(
             "ADDRESS_MATCH",
-            `Outlet Override (${outletOverride.addressContains})`
+            `Outlet Override : ${outletOverride.match}`
         );
 
         return matched;
 
     }
+
 }
     
     // Try special location matches
