@@ -93,18 +93,16 @@ const SPECIAL_LOCATION_MATCHES = [
 
 const SPECIAL_OUTLET_MATCHES = [
     {
-        outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1",
-        find: (x) =>
-            normalizeOutlet(x["Centre Name"] || "") ===
-            normalizeOutlet("PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1"),
-        label: "CHONG PANG CC-1"
+        outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)",
+        centre: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1"
     },
     {
         outlet: "PCF Sparkletots Preschool @ Marsiling (CC)-1",
-        find: (x) =>
-            normalizeOutlet(x["Centre Name"] || "") ===
-            normalizeOutlet("PCF Sparkletots Preschool @ Marsiling (CC)-1"),
-        label: "MARSILING CC-1"
+        centre: "PCF Sparkletots Preschool @ Marsiling (CC)"
+    }
+    {
+        outlet: "XXXXX",
+        centre: "YYYYY"
     }
 ];
 
@@ -435,29 +433,24 @@ function findCandidates(outletName) {
 function matchAddress(candidates, pdfAddress, outletName) {
     if (!Array.isArray(candidates) || candidates.length === 0) return null;
     if (candidates.length === 1) return candidates[0];
-    // ===== Temporary fixes =====
-const pdfName = normalize(outletName);
+    
+   // ===== Outlet Override =====
 
-console.log("==========");
-console.log("Outlet Name:", outletName);
-console.log("Normalized:", pdfName);
-console.log(
-    "Candidates:",
-    candidates.map(x => x["Centre Name"])
-);    
+const outletOverride = SPECIAL_OUTLET_MATCHES.find(x =>
+    normalize(x.outlet) === normalize(outletName)
+);
 
-if (pdfName === normalize("PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)")) {
-    const found = candidates.find(x =>
-        String(x["Centre Name"]).includes("(CC)-1")
+if (outletOverride) {
+
+    const matched = candidates.find(x =>
+        normalize(x["Centre Name"]) ===
+        normalize(outletOverride.centre)
     );
-    if (found) return found;
-}
 
-if (pdfName === normalize("PCF Sparkletots Preschool @ Marsiling (CC)-1")) {
-    const found = candidates.find(x =>
-        String(x["Centre Name"]) === "PCF Sparkletots Preschool @ Marsiling (CC)"
-    );
-    if (found) return found;
+    if (matched) {
+        logDebug("ADDRESS_MATCH", `Outlet Override`);
+        return matched;
+    }
 }
     
     const pdfAddressUpper = String(pdfAddress || "").toUpperCase();
