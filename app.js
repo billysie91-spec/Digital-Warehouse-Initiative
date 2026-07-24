@@ -99,7 +99,7 @@ const SPECIAL_OUTLET_MATCHES = [
     {
         outlet: "PCF Sparkletots Preschool @ Marsiling (CC)-1",
         centre: "PCF Sparkletots Preschool @ Marsiling (CC)"
-    }
+    },
     {
         outlet: "XXXXX",
         centre: "YYYYY"
