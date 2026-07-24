@@ -471,8 +471,6 @@ if (outletOverride) {
     }
 }
     
-    const pdfAddressUpper = String(pdfAddress || "").toUpperCase();
-    
     // Try special location matches
     for (const { check, find, label } of SPECIAL_LOCATION_MATCHES) {
         if (check(pdfAddressUpper)) {
