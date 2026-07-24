@@ -104,7 +104,7 @@ const SPECIAL_OUTLET_MATCHES = [
     },
     {
         outlet: "PCF Sparkletots Preschool @ Marsiling (CC)",
-        addressContains: "NO 9 WOODLANDS STREET 12",
+        addressContains: "9 WOODLANDS ST 12",
         centre: "PCF Sparkletots Preschool @ Marsiling (CC)"
     },
     {
@@ -445,11 +445,13 @@ function matchAddress(candidates, pdfAddress, outletName) {
   // ===== Outlet Override =====
 
 const pdfOutlet = normalize(outletName);
-const pdfAddressUpper = String(pdfAddress || "").toUpperCase();
+const pdfAddressNormalized = normalize(pdfAddress, "address");
 
 const outletOverride = SPECIAL_OUTLET_MATCHES.find(x =>
     normalize(x.outlet) === pdfOutlet &&
-    pdfAddressUpper.includes(x.addressContains.toUpperCase())
+    pdfAddressNormalized.includes(
+        normalize(x.addressContains, "address")
+    )
 );
 
 if (outletOverride) {
