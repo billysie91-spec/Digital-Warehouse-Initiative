@@ -75,18 +75,36 @@ const NORMALIZATION_RULES = {
 const SPECIAL_LOCATION_MATCHES = [
     {
         check: (addr) => addr.includes("YISHUN AVE 11"),
-        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("YISHUN AVE 11"),
+        find: (x) =>
+            String(x["Centre Address"] || "")
+                .toUpperCase()
+                .includes("YISHUN AVE 11"),
         label: "YISHUN AVE 11"
     },
     {
-        check: (addr) => addr.includes("YISHUN RING ROAD"),
-        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("YISHUN RING ROAD"),
-        label: "YISHUN RING ROAD"
+        check: (addr) => addr.includes("991 UPPER JURONG ROAD"),
+        find: (x) =>
+            String(x["Centre Address"] || "")
+                .toUpperCase()
+                .includes("991 UPPER JURONG ROAD"),
+        label: "PIONEER"
+    }
+];
+
+const SPECIAL_OUTLET_MATCHES = [
+    {
+        outlet: "PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1",
+        find: (x) =>
+            normalizeOutlet(x["Centre Name"] || "") ===
+            normalizeOutlet("PCF Sparkletots Preschool @ Chong Pang Blk 115B (CC)-1"),
+        label: "CHONG PANG CC-1"
     },
     {
-        check: (addr) => addr.includes("991 UPPER JURONG ROAD"),
-        find: (x) => String(x["Centre Address"] || "").toUpperCase().includes("991 UPPER JURONG ROAD"),
-        label: "PIONEER (991 UPPER JURONG ROAD)"
+        outlet: "PCF Sparkletots Preschool @ Marsiling (CC)-1",
+        find: (x) =>
+            normalizeOutlet(x["Centre Name"] || "") ===
+            normalizeOutlet("PCF Sparkletots Preschool @ Marsiling (CC)-1"),
+        label: "MARSILING CC-1"
     }
 ];
 
